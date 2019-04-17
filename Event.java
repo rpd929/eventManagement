@@ -13,35 +13,37 @@ import java.util.*;
  */
 public class Event {
     
-   public int eventID;
-   private ArrayList<Date> dates;
+   public String eventID;
+   private ArrayList<Calendar> dates;
    private int price;
    private String[] promoCodes;
    private int capacity;
    private String location;
    private String name;
    private int numberOfSessions;
-   private ArrayList<Integer> bookingIDs;
+   private ArrayList<String> bookingIDs;
   
 
-    public Event( ArrayList<Date> dates, int price, int capacity, String location, String name, int numberOfSessions) {
+    public Event( ArrayList<Calendar> dates, int price, int capacity, String location, String name, int numberOfSessions) {
         this.dates = dates;
         this.price = price;
         this.capacity = capacity;
         this.location = location;
         this.name = name;
         this.numberOfSessions = numberOfSessions;
+        this.eventID = createEventID();
+        this.bookingIDs = new ArrayList<String>();
        
     }
 
-    public int getEventID() {
+    public String getEventID() {
         return eventID;
     }
 
-    public Date getDate(int sessionNumber) {
+    public Calendar getDate(int sessionNumber) {
         if(sessionNumber < dates.size())
         {
-            Date session = dates.get(sessionNumber);
+             Calendar session = dates.get(sessionNumber);
              return session;
             
         }
@@ -75,18 +77,40 @@ public class Event {
     }
     
     
-    public void makeBooking(Integer bookingID){
+    public void makeBooking(String bookingID){
         
         bookingIDs.add(bookingID);
         
     }
     
-    public ArrayList<Integer> getBookings() {
+    public ArrayList<String> getBookings() {
         
         return bookingIDs;
     
-    
 }
+    public String createEventID()
+    {
+        Random random = new Random();
+        int val = random.nextInt();
+        String Hex = new String();
+        Hex = Integer.toHexString(val);
+        return Hex; 
+           
+        
+    }
+    
+    
+    public void printEvent()
+    {
+        System.out.println("Event Name: " + this.getName());
+        System.out.println("Event Price: " + this.getPrice());
+        System.out.println("Event Capacity: " + this.getCapacity());
+        System.out.println("Event Date: " + this.getDate(0).getTime());
+        System.out.println("Event Location: " + this.getLocation());
+        
+        System.out.println("EVENT ID " + this.eventID);
+    }
+    
     
     
    

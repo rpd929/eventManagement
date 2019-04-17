@@ -6,42 +6,60 @@
 package eventbooking;
 
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 
 
 public class Booking {
  
-    public double bookingID;
-    private Date date;
+    public String bookingID;
+    private Calendar date;
     private Event eventBooked;
     private int sessionNumber;
     private String bookerName;
 
     public Booking(Event eventBooked, int sessionNumber, String bookerName) {
      
-        double newID = Math.random() * 100;
-        
-        this.bookingID = Math.round(newID);
+       
+        this.bookingID = createBookingID();
         this.eventBooked = eventBooked;
         this.date = eventBooked.getDate(sessionNumber); 
         this.bookerName = bookerName;
         this.sessionNumber = sessionNumber;
       
-        
+  
             
     }
     
     public void printBookingInformation()
     {
-        System.out.println("Booking...");
+        
+        System.out.println("BookingID: " + this.bookingID);
         System.out.println("Event Name: " + this.eventBooked.getName());
         System.out.println("Booked by: " + this.bookerName);
-        System.out.println("For session number: " + this.sessionNumber + " of a total of: " + eventBooked.getNumberOfSessions() + " Sessions");
-        System.out.println("With Booking ID: " + bookingID); 
+        System.out.println("For session number: " + this.sessionNumber + " of a total of: " + eventBooked.getNumberOfSessions() + " Sessions");          
         System.out.println("----------------------------");
     }
     
+    public String createBookingID()
+    {
+        Random random = new Random();
+        int val = random.nextInt();
+        String Hex = new String();
+        Hex = Integer.toHexString(val);
+        
+       
+        return Hex; 
+        
+     
+    }
+    
+    public void makeBooking(String bookingID, Event currentEvent)
+    {
+       currentEvent.makeBooking(bookingID);
+    }
     
     
 }
