@@ -130,7 +130,7 @@
     <Component class="javax.swing.JTextField" name="nameField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="allEvents.allEvents.get(indexEvent).getName()" type="code"/>
+          <Connection code="eventToChange.getName()" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -148,17 +148,21 @@
     <Component class="javax.swing.JTextField" name="priceField">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="priceField.setText(Integer.toString(allEvents.allEvents.get(indexEvent).getPrice()));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="priceField = new javax.swing.JTextField();&#xa;int price = eventToChange.getPrice();&#xa;String priceString = Integer.toString(price);&#xa;priceField.setText(priceString);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="capacityField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="capacityFieldActionPerformed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="capacityField.setText(Integer.toString(allEvents.allEvents.get(indexEvent).getCapacity()));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="capacityField.setText(Integer.toString(eventToChange.getCapacity()));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="locationField">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="locationField.setText(allEvents.allEvents.get(indexEvent).getLocation());"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="locationField.setText(eventToChange.getLocation());"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
