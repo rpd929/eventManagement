@@ -39,6 +39,8 @@ class allEvents {
         return retrievedEvent;
         
     }
+    
+   
      public int findEvent(String eventID)
     {
         if(allEventIDs.contains(eventID))
@@ -55,6 +57,17 @@ class allEvents {
         
         
     }
+     
+     public void replaceEvent(Event changedEvent)
+     {
+        int index = allEventIDs.indexOf(changedEvent.eventID);
+        
+         allEventIDs.set(index, changedEvent.eventID);
+         allEvents.set(index, changedEvent);
+         allEventStrings.set(index, createEventString(changedEvent));
+     }
+             
+             
     
    
     

@@ -21,7 +21,8 @@ public class Event {
    private int capacity;
    private String location;
    private String name;
-   private ArrayList<String> bookingIDs;
+   private ArrayList<Booking> allBookings;
+   private ArrayList<String> allBookingIDs;
   
 
     public Event(Calendar date, int price, int capacity, String location, String name) {
@@ -31,7 +32,8 @@ public class Event {
         this.location = location;
         this.name = name;
         this.eventID = createEventID();
-        this.bookingIDs = new ArrayList<String>();
+        this.allBookings = new ArrayList<Booking>();
+        this.allBookingIDs = new ArrayList<String>();
         this.eventString = this.name;
         eventString = eventString + " " + this.location;
         eventString = eventString + " $" + Integer.toString(this.price);
@@ -72,21 +74,48 @@ public class Event {
     public String getName() {
         return name;
     }
+    
+    public boolean findBooking(String bookingID)
+    {
+        if(allBookingIDs.contains(bookingID))
+        {
+            return true;
+            
+        } else 
+        {
+            return false;
+        }
+    }
 
     
     
     
-    public void makeBooking(String bookingID){
+    public void makeBooking(Booking newBooking){
         
-        bookingIDs.add(bookingID);
+        allBookingIDs.add(newBooking.bookingID);
+        allBookings.add(newBooking);
         
     }
     
     public ArrayList<String> getBookings() {
         
-        return bookingIDs;
+        return allBookingIDs;
     
 }
+    
+    public void editBookings(Booking oldBooking, Booking newBooking)
+    {
+        allBookingIDs.set(allBookingIDs.indexOf(oldBooking.bookingID), newBooking.bookingID);
+        allBookings.set(allBookings.indexOf(oldBooking), newBooking);
+    }
+    
+    public Booking getSingleBooking(String bookingID)
+    {
+        int indexOfBooking = allBookingIDs.indexOf(bookingID);
+        Booking newBooking = allBookings.get(indexOfBooking);
+        return newBooking;
+        
+    }
     public String createEventID()
     {
         Random random = new Random();

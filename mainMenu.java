@@ -107,7 +107,7 @@ public class mainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_createEventActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+            new manageBooking().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -48,7 +48,7 @@ public class bookEvent extends javax.swing.JFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Name:");
 
@@ -99,6 +99,8 @@ public class bookEvent extends javax.swing.JFrame {
         System.out.println(selectedEvent.eventString);
         
         Booking newBooking = new Booking(selectedEvent, bookerName);
+        this.dispose();
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
