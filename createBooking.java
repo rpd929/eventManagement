@@ -4,20 +4,18 @@
  * and open the template in the editor.
  */
 package eventbooking;
-
-import static eventbooking.allEvents.allEvents;
-import java.util.ArrayList;
-
+import java.util.*;
+import javax.swing.ListSelectionModel;
 /**
  *
  * @author sian
  */
-public class manageEvent extends javax.swing.JFrame {
+public class createBooking extends javax.swing.JFrame {
 
     /**
-     * Creates new form manageEvent
+     * Creates new form createBooking
      */
-    public manageEvent() {
+    public createBooking() {
         initComponents();
     }
 
@@ -31,14 +29,24 @@ public class manageEvent extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        eventIDField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        eventStringList = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Enter EventID");
+        eventStringList.setModel(new javax.swing.DefaultListModel<String>() {
 
-        jButton1.setText("Find Event");
+            ArrayList<String> allEventStrings = allEvents.allEventStrings;
+
+            public int getSize() { return allEventStrings.size();}
+            public String getElementAt(int i) { return allEventStrings.get(i);}
+
+        });
+        eventStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(eventStringList);
+
+        jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -52,62 +60,34 @@ public class manageEvent extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(eventIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
+                        .addGap(150, 150, 150)
                         .addComponent(jButton1)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(eventIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        //Gathering the eventID provided to be searched for
-        String eventID = "";
-        eventID = this.eventIDField.getText();
-        
-        
-        allEvents eventList = new allEvents();
-        
-        //Printing to see if the values have been added correctly
-        System.out.println(eventList.getSize());
-            
-        /*Checks to see if the eventID exists and returns the index in the array where it appears,
-            returns -1 when doesn't find a value. */ 
-        
-        int foundEventIndex = eventList.findEvent(eventID);
-        
-        System.out.println();
-        
-        /* If the event is found, window opens that allows changes to be made to the event */
-        if(foundEventIndex > -1)
-        {
-            new changeEvent(foundEventIndex).setVisible(true);
-       
-            
-        } else {
-            
-        }
-        
-        
-        
+      Event selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
+      new bookEvent(selectedEvent).setVisible(true);
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -127,29 +107,28 @@ public class manageEvent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(manageEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(createBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(manageEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(createBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(manageEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(createBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(manageEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(createBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new manageEvent().setVisible(true);
+                new createBooking().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField eventIDField;
+    private javax.swing.JList eventStringList;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
-
-

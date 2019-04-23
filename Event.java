@@ -14,25 +14,28 @@ import java.util.*;
 public class Event {
     
    public String eventID;
-   private ArrayList<Calendar> dates;
+   public String eventString;
+   private Calendar date;
    private int price;
    private String[] promoCodes;
    private int capacity;
    private String location;
    private String name;
-   private int numberOfSessions;
    private ArrayList<String> bookingIDs;
   
 
-    public Event( ArrayList<Calendar> dates, int price, int capacity, String location, String name, int numberOfSessions) {
-        this.dates = dates;
+    public Event(Calendar date, int price, int capacity, String location, String name) {
+        this.date = date;
         this.price = price;
         this.capacity = capacity;
         this.location = location;
         this.name = name;
-        this.numberOfSessions = numberOfSessions;
         this.eventID = createEventID();
         this.bookingIDs = new ArrayList<String>();
+        this.eventString = this.name;
+        eventString = eventString + " " + this.location;
+        eventString = eventString + " $" + Integer.toString(this.price);
+        
        
     }
 
@@ -40,15 +43,9 @@ public class Event {
         return eventID;
     }
 
-    public Calendar getDate(int sessionNumber) {
-        if(sessionNumber < dates.size())
-        {
-             Calendar session = dates.get(sessionNumber);
-             return session;
-            
-        }
-        else 
-            return null;
+    public Calendar getDate() {
+        
+        return date;
         
     }
 
@@ -58,6 +55,10 @@ public class Event {
 
     public String[] getPromoCodes() {
         return promoCodes;
+    }
+    
+    public String getEventString() {
+        return eventString;
     }
 
     public int getCapacity() {
@@ -72,9 +73,7 @@ public class Event {
         return name;
     }
 
-    public int getNumberOfSessions() {
-        return numberOfSessions;
-    }
+    
     
     
     public void makeBooking(String bookingID){
@@ -105,7 +104,7 @@ public class Event {
         System.out.println("Event Name: " + this.getName());
         System.out.println("Event Price: " + this.getPrice());
         System.out.println("Event Capacity: " + this.getCapacity());
-        System.out.println("Event Date: " + this.getDate(0).getTime());
+        System.out.println("Event Date: " + this.date.getTime());
         System.out.println("Event Location: " + this.getLocation());
         
         System.out.println("EVENT ID " + this.eventID);
