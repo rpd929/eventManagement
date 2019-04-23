@@ -6,6 +6,7 @@ class allEvents {
      
     public static ArrayList<Event> allEvents = new ArrayList<>();
     public static ArrayList<String> allEventIDs = new ArrayList<>();
+    public static ArrayList<String> allEventStrings = new ArrayList<>();
     
     
     public int getSize()
@@ -15,9 +16,21 @@ class allEvents {
     
     public void addEvent(Event currentEvent)
     {
+        String eventString = createEventString(currentEvent);
         allEvents.add(currentEvent);
         allEventIDs.add(currentEvent.eventID);
+        allEventStrings.add(eventString);
 
+    }
+    
+    public String createEventString(Event currentEvent)
+    {
+        String eventString = "";
+        eventString = currentEvent.getName();
+        eventString = eventString + " " + currentEvent.getLocation();
+        eventString = eventString + " $" + Integer.toString(currentEvent.getPrice());
+        return eventString;
+        
     }
     
     public Event getEvent(int eventIndex)
