@@ -37,12 +37,14 @@ public class createBooking extends javax.swing.JFrame {
 
         eventStringList.setModel(new javax.swing.DefaultListModel<String>() {
 
+
             ArrayList<String> allEventStrings = allEvents.allEventStrings;
 
             public int getSize() { return allEventStrings.size();}
             public String getElementAt(int i) { return allEventStrings.get(i);}
 
         });
+
         eventStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(eventStringList);
 
@@ -52,6 +54,7 @@ public class createBooking extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,6 +82,7 @@ public class createBooking extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(12, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -89,6 +93,7 @@ public class createBooking extends javax.swing.JFrame {
       new bookEvent(selectedEvent).setVisible(true);
       
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -126,9 +131,12 @@ public class createBooking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JList eventStringList;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+
+   
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
