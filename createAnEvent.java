@@ -31,23 +31,21 @@ public class createAnEvent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
-        dateField = new javax.swing.JTextField();
         priceField = new javax.swing.JTextField();
         capacityField = new javax.swing.JTextField();
         locationField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        sessionNumberBox = new javax.swing.JComboBox();
+        dayComboBox = new javax.swing.JComboBox();
+        monthComboBox = new javax.swing.JComboBox();
+        yearComboBox = new javax.swing.JComboBox();
 
-        jLabel1.setText("Number of Sessions");
-
-        jLabel2.setText("Dates:");
+        jLabel2.setText("Date:");
 
         jLabel3.setText("Capacity");
 
@@ -63,8 +61,6 @@ public class createAnEvent extends javax.swing.JFrame {
             }
         });
 
-        dateField.setText("yyyy/mm/dd, yyyy/mm/dd, ...");
-
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,10 +68,14 @@ public class createAnEvent extends javax.swing.JFrame {
             }
         });
 
-        sessionNumberBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
-        sessionNumberBox.addActionListener(new java.awt.event.ActionListener() {
+        dayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"}));
+
+        monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12"}));
+
+        yearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"2019", "2020"}));
+        yearComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sessionNumberBoxActionPerformed(evt);
+                yearComboBoxActionPerformed(evt);
             }
         });
 
@@ -84,48 +84,57 @@ public class createAnEvent extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                        .addComponent(locationField)
-                        .addComponent(capacityField)
-                        .addComponent(priceField))
-                    .addComponent(sessionNumberBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(locationField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(capacityField, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                                .addComponent(priceField)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(167, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(150, 150, 150))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(sessionNumberBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addComponent(dayComboBox)
+                        .addComponent(monthComboBox)
+                        .addComponent(yearComboBox)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -136,7 +145,7 @@ public class createAnEvent extends javax.swing.JFrame {
                     .addComponent(locationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,23 +161,21 @@ public class createAnEvent extends javax.swing.JFrame {
             
             //Gathering information from the provided Fields
             String eventName = nameField.getText();
-            String sessionString = sessionNumberBox.getSelectedItem().toString();
+          
             String location = locationField.getText();
             String capacityString = capacityField.getText();
             String priceString = priceField.getText();
-            String dateString = dateField.getText();
+            
             
             //Converting String variables to integers
             int capacity = Integer.parseInt(capacityString); 
             int price = Integer.parseInt(priceString);
-            int sessionNumber = Integer.parseInt(sessionString);
+           
             
             
             
             
-            //Splitting the dates strings to get individual dates
-            String[] dateStrings;
-            dateStrings = dateString.split("/");
+          
             
             int year;
             int month;
@@ -180,9 +187,9 @@ public class createAnEvent extends javax.swing.JFrame {
             /*Assigning each part of the date to variables. NOTE*** Will be a for loop when more than
                one date is added for an event */
             
-            dayString = dateStrings[2];
-            monthString = dateStrings[1];
-            yearString = dateStrings[0];
+            dayString = dayComboBox.getSelectedItem().toString();
+            monthString = monthComboBox.getSelectedItem().toString();
+            yearString = yearComboBox.getSelectedItem().toString();
             
             day = Integer.parseInt(dayString);
             month = Integer.parseInt(monthString);
@@ -193,14 +200,12 @@ public class createAnEvent extends javax.swing.JFrame {
             singleDate.set(year, month-1, day);
           
             
-            ArrayList<Calendar> allDates = new ArrayList<>();
-            allDates.add(singleDate);
-            
+           
             
             /*Creating the event with provided values. NOTE** Will need to check these values before 
                 creating the event or will throw error */
             
-            Event myEvent = new Event(allDates, price, capacity, location, eventName, allDates.size());
+            Event myEvent = new Event(singleDate, price, capacity, location, eventName);
             
             //Adding the event to the list of all events
             eventList.addEvent(myEvent);
@@ -223,9 +228,9 @@ public class createAnEvent extends javax.swing.JFrame {
             
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void sessionNumberBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionNumberBoxActionPerformed
+    private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sessionNumberBoxActionPerformed
+    }//GEN-LAST:event_yearComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,17 +269,17 @@ public class createAnEvent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField capacityField;
-    private javax.swing.JTextField dateField;
+    private javax.swing.JComboBox dayComboBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField locationField;
+    private javax.swing.JComboBox monthComboBox;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField priceField;
-    private javax.swing.JComboBox sessionNumberBox;
+    private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
 }
