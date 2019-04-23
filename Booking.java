@@ -25,8 +25,10 @@ public class Booking {
         this.bookingID = createBookingID();
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
-        eventBooked.makeBooking(bookingID);
+        eventBooked.makeBooking(this);
         System.out.println(bookingID);
+        
+        
         
       
   
@@ -50,7 +52,16 @@ public class Booking {
         Hex = Integer.toHexString(val);
         return Hex; 
         
-     
+    }
+    
+    public String getName()
+    {
+        return bookerName;
+    }
+    
+    public void changeName(String name)
+    {
+        this.bookerName = name;
     }
     
    
