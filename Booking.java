@@ -16,18 +16,18 @@ public class Booking {
  
     public String bookingID;
     private Calendar date;
-    private Event eventBooked;
-    private int sessionNumber;
+    private Event eventBooked;   
     private String bookerName;
 
-    public Booking(Event eventBooked, int sessionNumber, String bookerName) {
+    public Booking(Event eventBooked, String bookerName) {
      
        
         this.bookingID = createBookingID();
-        this.eventBooked = eventBooked;
-        this.date = eventBooked.getDate(sessionNumber); 
+        this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
-        this.sessionNumber = sessionNumber;
+        eventBooked.makeBooking(bookingID);
+        System.out.println(bookingID);
+        
       
   
             
@@ -39,7 +39,6 @@ public class Booking {
         System.out.println("BookingID: " + this.bookingID);
         System.out.println("Event Name: " + this.eventBooked.getName());
         System.out.println("Booked by: " + this.bookerName);
-        System.out.println("For session number: " + this.sessionNumber + " of a total of: " + eventBooked.getNumberOfSessions() + " Sessions");          
         System.out.println("----------------------------");
     }
     
@@ -56,10 +55,7 @@ public class Booking {
      
     }
     
-    public void makeBooking(String bookingID, Event currentEvent)
-    {
-       currentEvent.makeBooking(bookingID);
-    }
+   
     
     
 }

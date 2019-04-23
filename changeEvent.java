@@ -213,14 +213,13 @@ public class changeEvent extends javax.swing.JFrame {
             
             Calendar singleDate = Calendar.getInstance();
             singleDate.set(year, month-1, day);
-            Date setDate = new Date();
+         
             
-            ArrayList<Calendar> allDates = new ArrayList<>();
-            allDates.add(singleDate);
+           
             
             
             /*Creating the new event that has the updated values */
-            Event myEvent = new Event(allDates, price, capacity, location, eventName, allDates.size());
+            Event myEvent = new Event(singleDate, price, capacity, location, eventName);
             
             /* The master list of all events is edited to REPLACE the old event with the 
                 newly created one. It will generate a new eventID and replace the position
