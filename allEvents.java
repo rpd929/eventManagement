@@ -58,13 +58,16 @@ class allEvents {
         
     }
      
-     public void replaceEvent(Event changedEvent)
+     public void replaceEvent(Event oldEvent, Event newEvent)
      {
-        int index = allEventIDs.indexOf(changedEvent.eventID);
+        int index = allEventIDs.indexOf(oldEvent.eventID);
+        System.out.println(oldEvent.getBookingIDs() + "replaceEvent method");
         
-         allEventIDs.set(index, changedEvent.eventID);
-         allEvents.set(index, changedEvent);
-         allEventStrings.set(index, createEventString(changedEvent));
+         allEventIDs.set(index, newEvent.eventID);
+         allEvents.set(index, newEvent);
+         allEventStrings.set(index, createEventString(newEvent));
+         newEvent.setBookings(oldEvent.getBookings(), oldEvent.getBookingIDs());
+         
      }
              
              

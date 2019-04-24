@@ -18,6 +18,7 @@ public class Booking {
     private Calendar date;
     private Event eventBooked;   
     private String bookerName;
+    private static allEvents eventList;
 
     public Booking(Event eventBooked, String bookerName) {
      
@@ -26,6 +27,8 @@ public class Booking {
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
         eventBooked.makeBooking(this);
+        //int eventIndex = eventList.findEvent(eventBooked.eventID);
+       
         System.out.println(bookingID);
         
         

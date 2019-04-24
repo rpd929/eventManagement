@@ -22,7 +22,36 @@ public class EventBooking {
       new mainMenu().setVisible(true);
     
 } 
+    
+    public static boolean checkStrings(String stringToBeChecked)
+    {
+            if(stringToBeChecked.isEmpty())
+            {  
+              String error = "Please enter values for all fields";
+              new errorForm(error).setVisible(true);
+              return false;
+            } else 
+            {
+               return true;
+            }
+    }
+    
+    public static boolean checkInts(String integerString)
+    {
+        try{
+            int enteredInt = Integer.parseInt(integerString);
+            return true;
+            
+        }catch(Exception e)
+        {
+            new errorForm("Value entered not a number").setVisible(true);
+            return false;
+            
+        }
+    }
+           
 }
+
 
 
 

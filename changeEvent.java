@@ -46,11 +46,13 @@ public class changeEvent extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
-        datesField = new javax.swing.JTextField();
         priceField = new javax.swing.JTextField();
         capacityField = new javax.swing.JTextField();
         locationField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        monthComboBox = new javax.swing.JComboBox();
+        yearComboBox = new javax.swing.JComboBox();
+        dayComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,12 +73,6 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
-        datesField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                datesFieldActionPerformed(evt);
-            }
-        });
-
         priceField.setText(Integer.toString(allEvents.allEvents.get(indexEvent).getPrice()));
 
         capacityField.setText(Integer.toString(allEvents.allEvents.get(indexEvent).getCapacity()));
@@ -89,6 +85,17 @@ public class changeEvent extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12"}));
+
+        yearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"2019", "2020"}));
+        yearComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearComboBoxActionPerformed(evt);
+            }
+        });
+
+        dayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,16 +112,23 @@ public class changeEvent extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datesField)
-                            .addComponent(priceField)
-                            .addComponent(capacityField)
-                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(locationField, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(96, 96, 96))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
                         .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(locationField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                                .addComponent(capacityField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(priceField, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +140,10 @@ public class changeEvent extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addComponent(dayComboBox)
+                        .addComponent(monthComboBox)
+                        .addComponent(yearComboBox)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,7 +158,7 @@ public class changeEvent extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,74 +168,14 @@ public class changeEvent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
 
-    private void datesFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datesFieldActionPerformed
-     
-    }//GEN-LAST:event_datesFieldActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            allEvents eventList = new allEvents();
-            
-            
-            //Gathering the entered information to be changed on the event
-            String eventName = nameField.getText();
-            String location = locationField.getText();
-            String capacityString = capacityField.getText();
-            String priceString = priceField.getText();
-            String dateString = datesField.getText();
-            
-            //Changing the strings to ints to be used by the constructor
-            int capacity = Integer.parseInt(capacityString);
-            int price = Integer.parseInt(priceString);           
-           
-            
-            //Start of the section that constructs the dates
-            int year;
-            int month;
-            int day;
-            
-            //Splits the date string into it's smaller parts (day/month/year)
-            String[] dateStrings;
-            dateStrings = dateString.split("/");
-            
-            
-            String dayString;
-            String monthString;
-            String yearString;
-            
-            
-            /* Assigning each part to the corresponding string. NOTE** Will have to do a second 
-            split to seperate different dates once more than 1 date is being used 
-            */
-            dayString = dateStrings[2];
-            monthString = dateStrings[1];
-            yearString = dateStrings[0];
-            
-            day = Integer.parseInt(dayString);
-            month = Integer.parseInt(monthString);
-            year = Integer.parseInt(yearString);
-            
-            Calendar singleDate = Calendar.getInstance();
-            singleDate.set(year, month-1, day);
-         
-            
-           
-            
-            
-            /*Creating the new event that has the updated values */
-            Event myEvent = new Event(singleDate, price, capacity, location, eventName);
-            myEvent.eventID = allEvents.allEventIDs.get(indexEvent);
-            
-            /* The master list of all events is edited to REPLACE the old event with the 
-                newly created one. It will generate a new eventID and replace the position
-                in the master list that the old event occupied. 
-            */
-            
-            
-            eventList.replaceEvent(myEvent);
-            System.out.println(myEvent.eventID);
-            this.dispose();
-            
+          
+         getInformation();     
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yearComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,10 +211,85 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
     }
+    public boolean checkEvent(String name, String location, String price, String capacity)
+    {
+       
+        if(EventBooking.checkInts(price) && EventBooking.checkStrings(name) && EventBooking.checkInts(capacity)
+                    && EventBooking.checkStrings(location))
+                   
+            return true;
+    
+        else {
+        
+                return false;
+            }
+    
+    }
+    
+    public void replaceEvent(String eventName, String location, String priceString, String capacityString)
+    {
+            allEvents eventList = new allEvents();
+            Event oldEvent = eventList.getEvent(indexEvent);
+            
+            //Converting String variables to integers
+            int capacity = Integer.parseInt(capacityString); 
+            int price = Integer.parseInt(priceString);
+   
+            int year;
+            int month;
+            int day;
+            String dayString;
+            String monthString;
+            String yearString;
+            
+            /*Assigning each part of the date to variables. NOTE*** Will be a for loop when more than
+               one date is added for an event */
+            
+            dayString = dayComboBox.getSelectedItem().toString();
+            monthString = monthComboBox.getSelectedItem().toString();
+            yearString = yearComboBox.getSelectedItem().toString();
+            
+            day = Integer.parseInt(dayString);
+            month = Integer.parseInt(monthString);
+            year = Integer.parseInt(yearString);
+            
+            
+            Calendar singleDate = Calendar.getInstance();
+            singleDate.set(year, month-1, day);
+            
+            /*Creating the event with provided values. NOTE** Will need to check these values before 
+                creating the event or will throw error */
+            
+            Event myEvent = new Event(singleDate, price, capacity, location, eventName);
+            myEvent.eventID = oldEvent.eventID;
+            //Adding the event to the list of all events
+            eventList.replaceEvent(oldEvent, myEvent);
+            this.dispose();
+            System.out.println(myEvent.eventID);
+            
+            
+        
+    }
+    
+    
+    public void getInformation()
+    {
+            String eventName = nameField.getText();          
+            String location = locationField.getText();
+            String capacityString = capacityField.getText();      
+            String priceString = priceField.getText();
+            
+            
+            if(checkEvent(eventName, location, priceString, capacityString))
+            {
+                replaceEvent(eventName, location, priceString, capacityString);
+            }
+                   
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField capacityField;
-    private javax.swing.JTextField datesField;
+    private javax.swing.JComboBox dayComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -265,7 +297,9 @@ public class changeEvent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField locationField;
+    private javax.swing.JComboBox monthComboBox;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField priceField;
+    private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
 }

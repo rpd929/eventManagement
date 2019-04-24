@@ -75,6 +75,12 @@ public class Event {
         return name;
     }
     
+    public void setBookings(ArrayList<Booking> allBookings, ArrayList<String> allBookingIDs)
+    {
+        this.allBookings = allBookings;
+        this.allBookingIDs = allBookingIDs;
+    }
+    
     public boolean findBooking(String bookingID)
     {
         if(allBookingIDs.contains(bookingID))
@@ -97,12 +103,16 @@ public class Event {
         
     }
     
-    public ArrayList<String> getBookings() {
+    public ArrayList<Booking> getBookings() {
+        
+        return allBookings;
+    
+}
+  public ArrayList<String> getBookingIDs() {
         
         return allBookingIDs;
     
-}
-    
+}   
     public void editBookings(Booking oldBooking, Booking newBooking)
     {
         allBookingIDs.set(allBookingIDs.indexOf(oldBooking.bookingID), newBooking.bookingID);
