@@ -25,7 +25,7 @@ public class sendEmail
         String user = "rory95spam@gmail.com";
         String pass = "tW5wv2Yu";
 
-
+        
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");	
         props.put("mail.smtp.auth", "true");
@@ -51,7 +51,6 @@ public class sendEmail
 
             Transport.send(message);
             
-            JOptionPane.showMessageDialog(null,"Email sended!");
             
         } catch (MessagingException e) 
         {

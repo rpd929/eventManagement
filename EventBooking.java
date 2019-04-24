@@ -49,6 +49,21 @@ public class EventBooking {
             
         }
     }
+    
+    public static boolean checkEmail(String emailAddress)
+    {
+        if(emailAddress.isEmpty()  || emailAddress.contains("@") == false)
+        {
+              String error = "Please enter a valid email";
+              new errorForm(error).setVisible(true);
+              return false;
+        } else { 
+            
+            return true;
+            
+        }
+        
+    }
            
 }
 

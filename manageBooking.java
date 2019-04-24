@@ -30,7 +30,7 @@ public class manageBooking extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        allEventStringsList = new javax.swing.JList();
+        eventStringList = new javax.swing.JList();
         bookingIDField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -38,16 +38,9 @@ public class manageBooking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        allEventStringsList.setModel(new javax.swing.DefaultListModel<String>() {
-
-            ArrayList<String> allEventStrings = allEvents.allEventStrings;
-
-            public int getSize() { return allEventStrings.size();}
-            public String getElementAt(int i) { return allEventStrings.get(i);}
-
-        });
-        allEventStringsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(allEventStringsList);
+        showEvents();
+        eventStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(eventStringList);
 
         bookingIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +107,7 @@ public class manageBooking extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
        Event selectedEvent = null;
-       selectedEvent = allEvents.allEvents.get(allEventStringsList.getSelectedIndex());
+       selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
        String bookingID = bookingIDField.getText();
        if(selectedEvent.findBooking(bookingID))
        {
@@ -165,10 +158,31 @@ public class manageBooking extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void showEvents()
+    {
+        allEvents eventList = new allEvents();
+        ArrayList<String> allEventsStrings = new ArrayList<>();
+        for(int count = 0; count < eventList.getSize(); count++)
+        {
+            String eventString = eventList.getEvent(count).eventString;
+            allEventsStrings.add(eventString);
+            
+        }
+        
+        eventStringList.setModel(new javax.swing.DefaultListModel<String>() {
+
+     ArrayList<String> allEventStrings = allEventsStrings;
+
+    public int getSize() { return allEventStrings.size();}
+    public String getElementAt(int i) { return allEventStrings.get(i);}
+
+});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList allEventStringsList;
     private javax.swing.JTextField bookingIDField;
+    private javax.swing.JList eventStringList;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
