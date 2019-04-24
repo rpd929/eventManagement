@@ -1,6 +1,7 @@
 package eventbooking;
 import eventbooking.Event;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 class allEvents {
      
@@ -69,6 +70,20 @@ class allEvents {
          newEvent.setBookings(oldEvent.getBookings(), oldEvent.getBookingIDs());
          
      }
+     
+     public static void removeEvent(Event eventToBeRemoved)
+     {
+         allEventIDs.remove(eventToBeRemoved.eventID);
+         allEvents.remove(eventToBeRemoved);
+         allEventStrings.remove(eventToBeRemoved.toString());
+         
+         JOptionPane.showMessageDialog(null,"Event Deleted");
+
+         
+        
+     }
+     
+    
              
              
     

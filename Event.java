@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package eventbooking;
+import java.time.Instant;
+import java.time.temporal.TemporalField;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -35,19 +38,28 @@ public class Event {
         this.allBookings = new ArrayList<Booking>();
         this.allBookingIDs = new ArrayList<String>();
         this.eventString = this.name;
-        eventString = eventString + " " + this.location;
-        eventString = eventString + " $" + Integer.toString(this.price);
+        eventString = eventString + " at " + this.location;
+        eventString = eventString + " on " + this.getDate();
         
        
+    }
+    
+    public String toString(){
+        
+        return eventString;
     }
 
     public String getEventID() {
         return eventID;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         
-        return date;
+        Date readableDate;
+        readableDate =  date.getTime();
+       
+    
+        return readableDate;
         
     }
 
@@ -134,6 +146,15 @@ public class Event {
         Hex = Integer.toHexString(val);
         return Hex; 
            
+        
+    }
+    
+    public void cancelBooking(Booking booking)
+    {
+        this.allBookingIDs.remove(booking.bookingID);
+        this.allBookings.remove(booking);
+        JOptionPane.showMessageDialog(null,"Booking Deleted");
+
         
     }
     

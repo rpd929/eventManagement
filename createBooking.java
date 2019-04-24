@@ -36,14 +36,7 @@ public class createBooking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        eventStringList.setModel(new javax.swing.DefaultListModel<String>() {
-
-            ArrayList<String> allEventStrings = allEvents.allEventStrings;
-
-            public int getSize() { return allEventStrings.size();}
-            public String getElementAt(int i) { return allEventStrings.get(i);}
-
-        });
+        showEvents();
         eventStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(eventStringList);
 
@@ -66,25 +59,29 @@ public class createBooking extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(91, 91, 91)
+                                .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(148, 148, 148)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel2)))
+                        .addComponent(jButton1)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -96,12 +93,11 @@ public class createBooking extends javax.swing.JFrame {
       Event selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
       new bookEvent(selectedEvent).setVisible(true);
       this.dispose();
-      
-     
-      
+
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
@@ -135,6 +131,27 @@ public class createBooking extends javax.swing.JFrame {
                 new createBooking().setVisible(true);
             }
         });
+    }
+    
+    public void showEvents()
+    {
+        allEvents eventList = new allEvents();
+        ArrayList<String> allEventsStrings = new ArrayList<>();
+        for(int count = 0; count < eventList.getSize(); count++)
+        {
+            String eventString = eventList.getEvent(count).eventString;
+            allEventsStrings.add(eventString);
+            
+        }
+        
+        eventStringList.setModel(new javax.swing.DefaultListModel<String>() {
+
+     ArrayList<String> allEventStrings = allEventsStrings;
+
+    public int getSize() { return allEventStrings.size();}
+    public String getElementAt(int i) { return allEventStrings.get(i);}
+
+});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
