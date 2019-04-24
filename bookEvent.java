@@ -96,7 +96,6 @@ public class bookEvent extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String bookerName = nameField.getText();
-        System.out.println(selectedEvent.eventString);
         
         Booking newBooking = new Booking(selectedEvent, bookerName);
         this.dispose();

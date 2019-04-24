@@ -44,6 +44,8 @@ public class createAnEvent extends javax.swing.JFrame {
         dayComboBox = new javax.swing.JComboBox();
         monthComboBox = new javax.swing.JComboBox();
         yearComboBox = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,17 +83,22 @@ public class createAnEvent extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Email Address");
+
+        emailField.setText("jTextField1");
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel6)
@@ -102,18 +109,28 @@ public class createAnEvent extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel2))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(capacityField, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                                        .addComponent(priceField)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(2, 2, 2)
+                                    .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
                                     .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(capacityField, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                                .addComponent(priceField)))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                                    .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -126,7 +143,11 @@ public class createAnEvent extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
@@ -147,7 +168,7 @@ public class createAnEvent extends javax.swing.JFrame {
                     .addComponent(locationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,68 +180,16 @@ public class createAnEvent extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
-            allEvents eventList = new allEvents();
-            
-            //Gathering information from the provided Fields
-            String eventName = nameField.getText();
           
-            String location = locationField.getText();
-            String capacityString = capacityField.getText();
-            String priceString = priceField.getText();
-            
-            
-            //Converting String variables to integers
-            int capacity = Integer.parseInt(capacityString); 
-            int price = Integer.parseInt(priceString);
-           
+            getInformation();
             
             
             
             
-          
-            
-            int year;
-            int month;
-            int day;
-            String dayString;
-            String monthString;
-            String yearString;
-            
-            /*Assigning each part of the date to variables. NOTE*** Will be a for loop when more than
-               one date is added for an event */
-            
-            dayString = dayComboBox.getSelectedItem().toString();
-            monthString = monthComboBox.getSelectedItem().toString();
-            yearString = yearComboBox.getSelectedItem().toString();
-            
-            day = Integer.parseInt(dayString);
-            month = Integer.parseInt(monthString);
-            year = Integer.parseInt(yearString);
-            
-            
-            Calendar singleDate = Calendar.getInstance();
-            singleDate.set(year, month-1, day);
-          
-            
-           
-            
-            /*Creating the event with provided values. NOTE** Will need to check these values before 
-                creating the event or will throw error */
-            
-            Event myEvent = new Event(singleDate, price, capacity, location, eventName);
-            
-            //Adding the event to the list of all events
-            eventList.addEvent(myEvent);
-            
-            System.out.println(myEvent.eventID);
-            
-           
-          
+
             
             
             
-            this.dispose();
-        
             
             
             
@@ -233,6 +202,10 @@ public class createAnEvent extends javax.swing.JFrame {
     private void yearComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_yearComboBoxActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,11 +241,111 @@ public class createAnEvent extends javax.swing.JFrame {
             }
         });
     }
+    
+    public boolean checkEvent(String name, String location, String price, String capacity)
+    {
+       
+        if(EventBooking.checkInts(price) && EventBooking.checkStrings(name) && EventBooking.checkInts(capacity)
+                    && EventBooking.checkStrings(location))
+                   
+            return true;
+    
+        else {
+        
+                return false;
+            }
+    
+    }
+    
+    public void getInformation()
+    {
+            String eventName = nameField.getText();          
+            String location = locationField.getText();
+            String capacityString = capacityField.getText();      
+            String priceString = priceField.getText();
+            String emailAddress = emailField.getText();
+          
+            
+            
+            if(checkEvent(eventName, location, priceString, capacityString) && checkEmail(emailAddress))
+            {
+                createNewEvent(eventName, location, priceString, capacityString, emailAddress);
+                
+            }
+                   
+    }
+    
+    public boolean checkEmail(String emailAddress)
+    {
+        if(emailAddress.isEmpty()  || emailAddress.contains("@") == false)
+        {
+              String error = "Please enter a valid email";
+              new errorForm(error).setVisible(true);
+              return false;
+        } else { 
+            
+            return true;
+            
+        }
+        
+    }
+    
+    public void createNewEvent(String eventName, String location, String priceString, String capacityString, String emailAddress)
+    {
+            allEvents eventList = new allEvents();
+            
+            //Converting String variables to integers
+            int capacity = Integer.parseInt(capacityString); 
+            int price = Integer.parseInt(priceString);
+   
+            int year;
+            int month;
+            int day;
+            String dayString;
+            String monthString;
+            String yearString;
+            
+            /*Assigning each part of the date to variables. NOTE*** Will be a for loop when more than
+               one date is added for an event */
+            
+            dayString = dayComboBox.getSelectedItem().toString();
+            monthString = monthComboBox.getSelectedItem().toString();
+            yearString = yearComboBox.getSelectedItem().toString();
+            
+            day = Integer.parseInt(dayString);
+            month = Integer.parseInt(monthString);
+            year = Integer.parseInt(yearString);
+            
+            
+            Calendar singleDate = Calendar.getInstance();
+            singleDate.set(year, month-1, day);
+            
+            /*Creating the event with provided values. NOTE** Will need to check these values before 
+                creating the event or will throw error */
+            
+            Event myEvent = new Event(singleDate, price, capacity, location, eventName);
+           
+            //Adding the event to the list of all events
+            eventList.addEvent(myEvent);
+            this.dispose();
+            System.out.println(myEvent.eventID);
+            String message = "Thankyou for booking with UOW Event Booking System. Your eventID is: " + myEvent.eventID;
+            message = message + ". This can be used to alter or cancel your event in the 'manage event' window of the application.";
+            sendEmail.send(emailAddress, eventName, message);
+           
+            
+            
+        
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField capacityField;
     private javax.swing.JComboBox dayComboBox;
+    private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
