@@ -26,9 +26,11 @@ public class Event {
    private String name;
    private ArrayList<Booking> allBookings;
    private ArrayList<String> allBookingIDs;
+   public String description;
+   private String emailAddress;
   
 
-    public Event(Calendar date, int price, int capacity, String location, String name) {
+    public Event(Calendar date, int price, int capacity, String location, String name, String description, String email) {
         this.date = date;
         this.price = price;
         this.capacity = capacity;
@@ -39,18 +41,56 @@ public class Event {
         this.allBookingIDs = new ArrayList<String>();
         this.eventString = this.name;
         eventString = eventString + " at " + this.location;
-        eventString = eventString + " on " + this.getDate();
-        
-       
+        eventString = eventString + " on " + this.getDate().getDay();
+        eventString = eventString + "/" + (this.getDate().getMonth() + 1);
+        eventString = eventString + "/" + (this.getDate().getYear() +1900) + " at ";
+        eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        this.description = description;
+        this.emailAddress = email;
+   
     }
     
     public String toString(){
         
         return eventString;
     }
+    
+    public String seeMore()
+    {
+        String seeMoreString;
+        seeMoreString = "<html><b> Event Name: </b> " + name + ". <br/><br/>";
+        seeMoreString = seeMoreString + "<b>Date: </b>" + getReadableDate()+ ".<br/><br/>";
+        seeMoreString = seeMoreString + "<b>Price: $</b>" + price + ". <br/><br/>";
+        seeMoreString = seeMoreString + "<b>Location: </b>" + location + ". <br/><br/>";
+        seeMoreString = seeMoreString + "<b>Description: </b>" + description + "</html>";
+        return seeMoreString;
+        
+    }
 
     public String getEventID() {
         return eventID;
+    }
+    
+    public String getReadableDate(){
+        
+        String dateString;
+        dateString = Integer.toString(date.getTime().getDate()) + "/";
+        dateString = dateString + Integer.toString(date.getTime().getMonth()+1) + "/";
+        dateString = dateString + Integer.toString(date.getTime().getYear() + 1900) + " ";
+        if(date.getTime().getHours() > 12)
+        {
+            dateString = dateString + Integer.toString(date.getTime().getHours() - 12) + ":";
+            dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "PM";
+            
+        } else {
+            
+            dateString = dateString + Integer.toString(date.getTime().getHours()) + ":";
+            dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "AM";
+            
+        }
+        return dateString;
+        
+        
     }
 
     public Date getDate() {
@@ -73,6 +113,11 @@ public class Event {
     
     public String getEventString() {
         return eventString;
+    }
+    
+    public String getEmail()
+    {
+        return emailAddress;
     }
 
     public int getCapacity() {
@@ -125,10 +170,10 @@ public class Event {
         return allBookingIDs;
     
 }   
-    public void editBookings(Booking oldBooking, Booking newBooking)
+    public void editBookings(Booking newBooking)
     {
-        allBookingIDs.set(allBookingIDs.indexOf(oldBooking.bookingID), newBooking.bookingID);
-        allBookings.set(allBookings.indexOf(oldBooking), newBooking);
+        allBookingIDs.set(allBookingIDs.indexOf(newBooking.bookingID), newBooking.bookingID);
+        allBookings.set(allBookings.indexOf(newBooking), newBooking);
     }
     
     public Booking getSingleBooking(String bookingID)
@@ -157,6 +202,8 @@ public class Event {
 
         
     }
+    
+    
     
     
     public void printEvent()
