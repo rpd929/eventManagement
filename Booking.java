@@ -9,6 +9,7 @@ package eventbooking;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 
 
@@ -18,15 +19,18 @@ public class Booking {
     private Calendar date;
     private Event eventBooked;   
     private String bookerName;
+    private String emailAddress;
     private static allEvents eventList;
 
-    public Booking(Event eventBooked, String bookerName) {
+    public Booking(Event eventBooked, String bookerName, String email) {
      
        
         this.bookingID = createBookingID();
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
+        this.emailAddress = email;
         eventBooked.makeBooking(this);
+        
         //int eventIndex = eventList.findEvent(eventBooked.eventID);
        
         System.out.println(bookingID);
@@ -62,9 +66,25 @@ public class Booking {
         return bookerName;
     }
     
-    public void changeName(String name)
+    public void changeBooking(String name, String email)
     {
+        
         this.bookerName = name;
+        this.emailAddress = email;
+        this.eventBooked.editBookings(this);
+        
+      
+        String msg;
+        String sub; 
+        sub = "Booking Change: " + this.bookingID; 
+        msg = "Booking Change for BookingID: " + this.bookingID;
+        
+        msg = msg + "\n" + "Event: " + this.eventBooked.getEventString();
+        msg = msg + "\n" + "Name: " + name + " Email: " + email;
+        JOptionPane.showMessageDialog(null,msg);
+        sendEmail.send(email, sub, msg);
+      
+       
     }
     
    

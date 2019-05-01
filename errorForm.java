@@ -20,6 +20,7 @@ public class errorForm extends javax.swing.JFrame {
     }
     public errorForm(String message) {
         initComponents();
+       
         this.jLabel1.setText(message);
         
     }
