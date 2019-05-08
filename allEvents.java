@@ -15,7 +15,7 @@ class allEvents {
         return allEvents.size();
     }
     
-    public void addEvent(Event currentEvent)
+    public static void addEvent(Event currentEvent)
     {
         String eventString = createEventString(currentEvent);
         allEvents.add(currentEvent);
@@ -24,7 +24,7 @@ class allEvents {
 
     }
     
-    public String createEventString(Event currentEvent)
+    public static String createEventString(Event currentEvent)
     {
         String eventString = "";
         eventString = currentEvent.getName();
@@ -34,7 +34,7 @@ class allEvents {
         
     }
     
-    public Event getEvent(int eventIndex)
+    public static Event getEvent(int eventIndex)
     {
         Event retrievedEvent = allEvents.get(eventIndex);
         return retrievedEvent;
@@ -42,7 +42,7 @@ class allEvents {
     }
     
    
-     public int findEvent(String eventID)
+     public static int findEvent(String eventID)
     {
         if(allEventIDs.contains(eventID))
         {
@@ -76,8 +76,10 @@ class allEvents {
          allEventIDs.remove(eventToBeRemoved.eventID);
          allEvents.remove(eventToBeRemoved);
          allEventStrings.remove(eventToBeRemoved.toString());
+         Storage.removeEvent(eventToBeRemoved);
          
          JOptionPane.showMessageDialog(null,"Event Deleted");
+         
 
          
         

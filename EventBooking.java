@@ -15,10 +15,10 @@ public class EventBooking {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ArrayList<Event> allEvents;
  
-  
+      Storage.startUp();
       new mainMenu().setVisible(true);
     
 } 

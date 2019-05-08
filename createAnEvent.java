@@ -227,6 +227,7 @@ public class createAnEvent extends javax.swing.JFrame {
             
           
             getInformation();
+            
         
     
             
@@ -366,9 +367,10 @@ public class createAnEvent extends javax.swing.JFrame {
                 creating the event or will throw error */
             
             Event myEvent = new Event(singleDate, price, capacity, location, eventName, description, emailAddress);
-           
+            Storage.createInsertStatement(myEvent);
             //Adding the event to the list of all events
             eventList.addEvent(myEvent);
+            Storage.insertEvent(myEvent);
             this.dispose();
             System.out.println(myEvent.eventID);
             String message = "<html>Thankyou for booking with UOW Event Booking System. <br/> Your eventID is: " + myEvent.eventID;
