@@ -50,6 +50,30 @@ public class Event {
    
     }
     
+    
+    
+    public Event(String eventID, Calendar date, int price, int capacity, String location, String name, String description, String email) {
+        this.date = date;
+        this.price = price;
+        this.capacity = capacity;
+        this.location = location;
+        this.name = name;
+        this.eventID = eventID;
+        this.allBookings = new ArrayList<Booking>();
+        this.allBookingIDs = new ArrayList<String>();
+        this.eventString = this.name;
+        eventString = eventString + " at " + this.location;
+        eventString = eventString + " on " + this.getDate().getDay();
+        eventString = eventString + "/" + (this.getDate().getMonth() + 1);
+        eventString = eventString + "/" + (this.getDate().getYear() +1900) + " at ";
+        eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        this.description = description;
+        this.emailAddress = email;
+   
+    }
+    
+    
+    
     public String toString(){
         
         return eventString;

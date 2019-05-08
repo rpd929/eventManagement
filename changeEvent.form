@@ -61,7 +61,6 @@
                                   <Component id="yearComboBox" min="-2" pref="93" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="minuteComboBox" min="-2" pref="76" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="amPmComboBox" min="-2" pref="68" max="-2" attributes="0"/>

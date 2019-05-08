@@ -41,6 +41,25 @@ public class Booking {
   
             
     }
+    public Booking(Event eventBooked, String bookerName, String email, String bookingID) {
+     
+       
+        this.bookingID = bookingID;
+        this.eventBooked = eventBooked; 
+        this.bookerName = bookerName;
+        this.emailAddress = email;
+        eventBooked.makeBooking(this);
+        
+        //int eventIndex = eventList.findEvent(eventBooked.eventID);
+       
+        System.out.println(bookingID);
+        
+        
+        
+      
+  
+            
+    }
     
     public void printBookingInformation()
     {
