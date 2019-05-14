@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventbooking;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,193 +20,263 @@ import java.util.Date;
 public class Storage {
     
     
-    public static void startUp() throws Exception 
-    { 
-       
-            String query = "Select count(*) from Event";
-            
-            try
-            {  
-                 ResultSet res = executeQueryWithReturn(query);
-                 int results = res.getInt(1);
-                 if(results >= 0)
-                {
-                    loadValues();
-                
-                } 
-            } catch(Exception e){
-                
-                Storage.createEventDB();
-            }
-           
-            
+    
+    public static Connection getConnection()
+    {
+         // SQLite connection string
+        String url = "jdbc:sqlite:test.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-           
-        
-    
-    
-    
-    public static void createEventDB() throws Exception
-    {
-       
-            String eventQuery = "CREATE TABLE EVENT(eventID VARCHAR(8) NOT NULL, eventName VARCHAR(30) NOT NULL, eventDateTime DATE NOT NULL, location VARCHAR(30) NOT NULL, price NUMBER NOT NULL, capacity NUMBER NOT NULL, description VARCHAR(100)NOT NULL, email VARCHAR(50) NOT NULL, CONSTRAINT Event_pkey PRIMARY KEY ( eventID) )";
-            executeQuery(eventQuery);
-            
-            String bookingQuery;
-            bookingQuery = "CREATE TABLE BOOKING( bookingID VARCHAR(6) NOT NULL, eventID VARCHAR(6) NOT NULL, name VARCHAR(30) Not NULL, email VARCHAR(50) NOT NULL, CONSTRAINT Booking_pkey PRIMARY KEY (bookingID), CONSTRAINT booking_fkey1 FOREIGN KEY (eventID) REFERENCES EVENT(eventID))";
-            executeQuery(bookingQuery);
-            
-            System.out.println("DB Created");
-  
-        
+        return conn;
+
+
     }
     
-        public static void loadValues() throws Exception
+    public static void loadEvents()
     {
-        System.out.println("Load Values...");
-        loadEvents();
-        loadBookings();
-        
-    }
-        
-     public static void loadEvents() throws Exception   
-     { 
-         String loadEvents; 
-         loadEvents = "Select * from EVENT;";
-         ResultSet rs = executeQueryWithReturn(loadEvents);
-         Calendar c = null; 
-         DateAndCalendar convert = new DateAndCalendar();
-         
-         
-         
-            
-            while (rs.next()) {
+        String sql = "SELECT eventID, eventName, eventDateTime, location, price, capacity, description, email From Event;";
+            Event event;
+            try (Connection conn = getConnection();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) 
+            {
                 String eventID =rs.getString(1);
                 String eventName = rs.getString(2);
                 Date   eventDate = rs.getDate(3);
              
-               
-                c = convert.dateToCalendar(eventDate);
-                
+                DateAndCalendar convert = new DateAndCalendar();
+                Calendar c = convert.dateToCalendar(eventDate);
                 String location =  rs.getString(4);
-                String description =  rs.getString(7);
-                String email = rs.getString(8);
+                
                 int price =  rs.getInt(5);
                 int capacity = rs.getInt(6);
-                
+
+                String description =  rs.getString(7);
+                String email = rs.getString(8);
                 Event newEvent = new Event(eventID, c, price, capacity, location, eventName, description, email);
                 allEvents.addEvent(newEvent); 
-                System.out.println(newEvent.eventID);
-                         
+                System.out.println("Event Loaded: " + newEvent.eventID);
             }
-            
-        } 
-     
-     
-     public static void loadBookings() throws Exception   
-     { 
-         String loadEvents; 
-         loadEvents = "Select * from BOOKING;";
-         ResultSet rs = executeQueryWithReturn(loadEvents);
-         
-         
-     }
-     
-     public static void insertEvent(Event evnt)
-    {
-       
-            String insertStatementString = createInsertStatement(evnt);
-            executeQuery(insertStatementString);
-            
-      
-    }
-     
-      public static String createInsertStatement(Event evnt)
-    {
-        String insertString;
-        String eventString;
-        String dateString;
-        
-        eventString = "INSERT INTO EVENT VALUES(";
-        eventString = eventString + "'" +evnt.getEventID() + "'" + "," + "'" + evnt.getName() + "'" + "," + evnt.getDate().getTime();
-        eventString = eventString + "," +  "'" + evnt.getLocation() + "'" + "," + evnt.getPrice() + "," + evnt.getCapacity();
-        eventString = eventString + "," +  "'" + evnt.description + "'" + ',' +  "'" + evnt.getEmail() + "'";
-        eventString = eventString + ");";
-        return eventString;
-    }
-      
-      public static String createEventDeleteStatement(Event evnt)
-      {
-          String deleteString;
-          
-          deleteString = "Delete from EVENT where eventID ='";
-          deleteString = deleteString + evnt.eventID + "';";
-          System.out.println(deleteString);
-          return deleteString;
-          
-      }
-       
-      public static void dropDB()
-      {
-          String drop = "Drop Table EVENT;";
-          executeQuery(drop);
-          String bookingDrop = "Drop table BOOKING;";
-          executeQuery(bookingDrop);
-          
-      }
-      
-      public static void executeQuery(String query)
-    {
-        Connection c = null;
-        
-        try{
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            Statement insertStatement = c.createStatement();
-            
-            insertStatement.executeUpdate(query);
-            
-            
-          } catch(ClassNotFoundException | SQLException e)
-        {
-            System.out.println(e.toString());
-            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
+
         
     }
-      
-      public static ResultSet executeQueryWithReturn(String query)
-    {
-        Connection c = null;
-        
-        try{
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-            Statement insertStatement = c.createStatement();
-            ResultSet results;
-            results = insertStatement.executeQuery(query);
-            return results;
-            
-            
-          } catch(ClassNotFoundException | SQLException e)
-        {
-            System.out.println(e.toString());
-            return null;
-            
-        }
-        
-    }
-      
-      public static void removeEvent(Event event) 
-      {
-           String deleteQuery = Storage.createEventDeleteStatement(event);
-           Storage.executeQuery(deleteQuery);
-          
-         
-      }
-      
-      
-      
-       
     
+    public static void insertBooking(Booking booking)
+    {
+
+        String sql = "INSERT INTO BOOKING(bookingID, eventID, name, email) VALUES(?,?,?,?)";
+ 
+             try (Connection conn = getConnection())
+             {
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, booking.bookingID);
+                pstmt.setString(2, booking.getEventID());
+                pstmt.setString(3, booking.getName());
+                pstmt.setString(4, booking.getEmail());
+
+                pstmt.executeUpdate();
+                
+                System.out.println("Booking Inserted!");
+            } catch (SQLException e) {
+                
+                System.out.println(e.getMessage());
+        }
+    }
+    
+    public static void loadBookings()
+    {
+        String sql = "SELECT bookingID, eventID, name, email FROM BOOKING;";
+                Booking booking;
+        try(Connection conn = getConnection())
+        {
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql);
+            
+            // loop through the result set
+            while (rs.next()) {
+                String bookingID = rs.getString("bookingID");
+                String eventID = rs.getString("eventID");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                
+                int eventIndex = allEvents.findEvent(eventID);
+                if(eventIndex != -1)
+                {   Event event = allEvents.getEvent(eventIndex);
+
+                    booking = new Booking(event, bookingID, name, email);
+                
+                
+                    System.out.println("Booking Loaded: " + "\n EventID: " + event.eventID + "\n BookingID: " + bookingID);
+                }else {
+                    
+                    System.out.println("Cannot find event for given booking. BookingID: " + bookingID);
+                    
+                }
+                              
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public static void deleteBooking(String bookingID)
+    {
+         String sql = "Delete from Booking where bookingID = ?";
+ 
+        try (Connection conn = getConnection())
+        {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, bookingID);
+            pstmt.executeUpdate();
+            
+            System.out.println(sql);
+
+        } catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+    
+    public static void updateBooking(Booking booking)
+    {
+
+        String sql = "UPDATE BOOKING SET name = ? , "
+                    + "email = ? "
+                    +  "WHERE bookingID = ?";
+
+        try (Connection conn = getConnection())
+        {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, booking.getName());
+            pstmt.setString(2, booking.getEmail());
+            pstmt.setString(3, booking.getBookingID());
+
+            pstmt.executeUpdate();
+            
+        } catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+    }
+ 
+    
+    
+           
+        
+    
+    
+    
+    
+    
+      
+        
+   
+     
+    public static void insertEvent(Event event) 
+    {
+        String sql = "INSERT INTO EVENT(eventID, eventName, eventDateTime, location, price, capacity, description, email) VALUES(?,?,?,?,?,?,?,?)";
+ 
+        try (Connection conn = getConnection())
+        {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, event.getEventID());
+            pstmt.setString(2, event.getName());
+            
+            java.sql.Date sDate = new java.sql.Date(event.getDate().getTime());
+            pstmt.setDate(3, sDate);
+             
+            pstmt.setString(4, event.getLocation());
+            pstmt.setDouble(5, event.getPrice());
+            pstmt.setInt(6, event.getCapacity());
+            pstmt.setString(7, event.getDescription());
+            pstmt.setString(8, event.getEmail());
+            pstmt.executeUpdate();
+            System.out.println("Insert Complete!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public static void deleteEvent(Event event)
+    {
+
+        String sql = "Delete from Event where eventID = ?";
+ 
+        try (Connection conn = getConnection())
+        {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, event.eventID);
+            pstmt.executeUpdate();
+            
+            for(int count = 0; count < event.getBookingIDs().size(); count++)
+            {
+                String bookingID = event.getBookingIDs().get(count);
+                deleteBooking(bookingID);
+            }
+            System.out.println(sql);
+
+        } catch(Exception e)
+        {
+            System.out.println("Error" + e.getMessage());
+        }
+
+    }
+    
+    public static void updateEvent(Event event)
+    {
+         String sql = "UPDATE EVENT SET eventName = ? , "
+                + "eventDateTime = ? , "
+                + "location = ? , "
+                + "price = ? , "
+                + "capacity = ? , "
+                + "description = ? , "
+                + "email = ?"
+                + "WHERE eventID =?";
+                
+               
+        try (Connection conn = getConnection())
+            
+        {
+            // set the corresponding param
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(8, event.getEventID());
+            pstmt.setString(1, event.getName());
+            
+            java.sql.Date sDate = new java.sql.Date(event.getDate().getTime());
+            pstmt.setDate(2, sDate);
+             
+            pstmt.setString(3, event.getLocation());
+            pstmt.setDouble(4, event.getPrice());
+            pstmt.setInt(5, event.getCapacity());
+            pstmt.setString(6, event.getDescription());
+            pstmt.setString(7, event.getEmail());
+           
+            
+            // update 
+            pstmt.executeUpdate();
+            System.out.println("Update Complete!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+
 }
