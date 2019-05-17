@@ -125,7 +125,7 @@ public class bookEvent extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void checkBooking(String name, String email)
+    public static void checkBooking(String name, String email)
     {
         if(EventBooking.checkStrings(name) && EventBooking.checkEmail(email));
         {
@@ -138,9 +138,9 @@ public class bookEvent extends javax.swing.JFrame {
              message = message + "<br/>An email with this information has also been sent to the supplied address. <html/>";
              
              JOptionPane.showMessageDialog(null,message);
-             sendEmail.send(email, selectedEvent.getName(), message);
-           
-            
+             Storage.insertBooking(newBooking);
+             //sendEmail.send(email, selectedEvent.getName(), message);
+      
         }
     }
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed

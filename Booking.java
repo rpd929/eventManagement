@@ -29,45 +29,34 @@ public class Booking {
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
         this.emailAddress = email;
-        eventBooked.makeBooking(this);
-        
-        //int eventIndex = eventList.findEvent(eventBooked.eventID);
+        bookEvent(eventBooked);
        
-        System.out.println(bookingID);
         
-        
-        
-      
-  
-            
+        //int eventIndex = eventList.findEvent(eventBooked.eventID); 
     }
-    public Booking(Event eventBooked, String bookerName, String email, String bookingID) {
+    public Booking(Event eventBooked,  String bookingID, String bookerName, String email) {
      
        
         this.bookingID = bookingID;
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
         this.emailAddress = email;
-        eventBooked.makeBooking(this);
+        bookEvent(eventBooked);
         
         //int eventIndex = eventList.findEvent(eventBooked.eventID);
-       
-        System.out.println(bookingID);
-        
-        
-        
-      
-  
-            
+     
     }
     
-    public void printBookingInformation()
+    public final void bookEvent(Event event)
+    {
+        event.makeBooking(this);
+    }
+    
+    public String viewBooking()
     {
         
-        System.out.println("BookingID: " + this.bookingID);
-        System.out.println("Event Name: " + this.eventBooked.getName());
-        System.out.println("Booked by: " + this.bookerName);
-        System.out.println("----------------------------");
+        String bookingString = "<html><b>BookingID: </b> " + this.bookingID + " <b> Event: </b>  " + eventBooked.eventString + "</html>";
+       return bookingString;
     }
     
     public String createBookingID()
@@ -78,6 +67,20 @@ public class Booking {
         Hex = Integer.toHexString(val);
         return Hex; 
         
+    }
+    
+    public String getEventID()
+    {
+        return eventBooked.eventID;
+    }
+    
+    public String getBookingID()
+    {
+        return bookingID;
+    }
+     public String getEmail()
+    {
+        return this.emailAddress;
     }
     
     public String getName()
@@ -102,6 +105,7 @@ public class Booking {
         msg = msg + "\n" + "Name: " + name + " Email: " + email;
         JOptionPane.showMessageDialog(null,msg);
         sendEmail.send(email, sub, msg);
+        Storage.updateBooking(this);
       
        
     }

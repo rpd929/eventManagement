@@ -11,6 +11,11 @@ import java.util.*;
  */
 public class EventBooking {
     
+    static boolean loginStatus;
+    static User currentUser = null;
+    
+    
+    
    
     /**
      * @param args the command line arguments
@@ -18,8 +23,9 @@ public class EventBooking {
     public static void main(String[] args) throws Exception {
         ArrayList<Event> allEvents;
  
-      Storage.startUp();
-      new mainMenu().setVisible(true);
+        Storage.loadEvents();
+        Storage.loadBookings();
+        new openingWindow().setVisible(true);
     
 } 
     
@@ -64,6 +70,30 @@ public class EventBooking {
         }
         
     }
+    
+    public static boolean userLoginStatus()
+    {
+        return loginStatus;
+        
+    }
+    
+    public static void userLogin(User user)
+    {
+        currentUser = user;
+        loginStatus = true;
+        Storage.loadEventHistory();
+        Storage.loadBookingHistory();
+        
+    }
+    
+    public static void userLogout()
+    {
+        currentUser =  null;
+        loginStatus = false;
+        
+    }
+    
+   
            
 }
 

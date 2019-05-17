@@ -89,7 +89,17 @@ public class EventSeeMore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void makeBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeBookingButtonActionPerformed
-          new bookEvent(allEvents.allEvents.get(eventIndex)).setVisible(true);
+          if(EventBooking.loginStatus)
+          { 
+              Event event = allEvents.getEvent(eventIndex);
+              event.checkBooking(EventBooking.currentUser.name, EventBooking.currentUser.email);
+              EventBooking.currentUser.bookEvent(eventIndex);
+              System.out.println("User made booking!");
+          
+          } else
+          {
+              new bookEvent(allEvents.allEvents.get(eventIndex)).setVisible(true);
+          }
    
           this.dispose();
           

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package eventbooking;
+import static eventbooking.bookEvent.selectedEvent;
 import java.time.Instant;
 import java.time.temporal.TemporalField;
 import java.util.*;
@@ -66,11 +67,52 @@ public class Event {
         eventString = eventString + " on " + this.getDate().getDay();
         eventString = eventString + "/" + (this.getDate().getMonth() + 1);
         eventString = eventString + "/" + (this.getDate().getYear() +1900) + " at ";
-        eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        
+        if(this.getDate().getHours() > 12)
+        {
+            eventString = eventString + (this.getDate().getHours() - 12);
+              if(this.getDate().getMinutes() == 0)
+                {
+                    eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+                    eventString = eventString + "0 PM";
+                   
+                }
+        } else if(this.getDate().getMinutes() == 0)
+        {
+            eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+            eventString = eventString + "0";
+        } else {
+             eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        }
+       
+        
+      
+        
+       
         this.description = description;
         this.emailAddress = email;
    
     }
+    
+     public void checkBooking(String name, String email)
+    {
+        if(EventBooking.checkStrings(name) && EventBooking.checkEmail(email));
+        {
+             Booking newBooking = new Booking(this, name, email);
+             String message = "<html>Hi " + name + ", <br/>";
+             message = message + "Thanks for booking the event: " + getName();
+             message = message + " at " + getLocation() + " " + getDate();
+             message = message + "<br/>Your booking number is: " + newBooking.bookingID + ". ";
+             message = message + "<br/>To cancel or alter your booking, locate your booking in the 'manage booking' view of the applciation.";
+             message = message + "<br/>An email with this information has also been sent to the supplied address. <html/>";
+             
+             JOptionPane.showMessageDialog(null,message);
+             Storage.insertBooking(newBooking);
+             //sendEmail.send(email, selectedEvent.getName(), message);
+      
+        }
+    }
+   
     
     
     
@@ -126,6 +168,8 @@ public class Event {
         return readableDate;
         
     }
+    
+   
 
     public int getPrice() {
         return price;
@@ -154,6 +198,10 @@ public class Event {
 
     public String getName() {
         return name;
+    }
+    
+    public String getDescription(){
+        return description;
     }
     
     public void setBookings(ArrayList<Booking> allBookings, ArrayList<String> allBookingIDs)
@@ -222,6 +270,7 @@ public class Event {
     {
         this.allBookingIDs.remove(booking.bookingID);
         this.allBookings.remove(booking);
+        Storage.deleteBooking(booking.bookingID);
         JOptionPane.showMessageDialog(null,"Booking Deleted");
 
         

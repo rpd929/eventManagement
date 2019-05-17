@@ -20,7 +20,12 @@ public class createAnEvent extends javax.swing.JFrame {
      * Creates new form createAnEvent
      */
     public createAnEvent() {
-        initComponents();
+          initComponents();
+        if(EventBooking.loginStatus == true)
+        {
+            emailField.setText(EventBooking.currentUser.email);
+        }
+      
     }
 
     /**
@@ -99,7 +104,6 @@ public class createAnEvent extends javax.swing.JFrame {
 
         jLabel1.setText("Email Address");
 
-        emailField.setText("example@example.com");
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
@@ -225,7 +229,7 @@ public class createAnEvent extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
-          
+           
             getInformation();
             
         
@@ -302,6 +306,7 @@ public class createAnEvent extends javax.swing.JFrame {
             String location = locationField.getText();
             String capacityString = capacityField.getText();      
             String priceString = priceField.getText();
+            
             String emailAddress = emailField.getText();
             String description = descriptionField.getText();
           
@@ -367,7 +372,7 @@ public class createAnEvent extends javax.swing.JFrame {
                 creating the event or will throw error */
             
             Event myEvent = new Event(singleDate, price, capacity, location, eventName, description, emailAddress);
-            Storage.createInsertStatement(myEvent);
+            //Storage.createInsertStatement(myEvent);
             //Adding the event to the list of all events
             eventList.addEvent(myEvent);
             Storage.insertEvent(myEvent);
@@ -379,6 +384,10 @@ public class createAnEvent extends javax.swing.JFrame {
             
             //This displays message to the user to confirm booking made. Email is also sent to user.
             JOptionPane.showMessageDialog(null,message);
+            if(EventBooking.loginStatus)
+            {
+                EventBooking.currentUser.createEvent(myEvent);
+            }
             
             sendEmail.send(emailAddress, eventName, message);
            

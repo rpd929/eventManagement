@@ -107,10 +107,12 @@ public class manageBooking extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
        Event selectedEvent = null;
-       selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
-       String bookingID = bookingIDField.getText();
-       if(selectedEvent.findBooking(bookingID))
+       int selectedEventIndex = eventStringList.getSelectedIndex();
+       if(selectedEventIndex != -1)
        {
+          selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
+          String bookingID = bookingIDField.getText();
+      
           this.dispose();
           Booking newBooking =  selectedEvent.getSingleBooking(bookingID);
           new editBooking(selectedEvent, newBooking).setVisible(true);
@@ -118,7 +120,7 @@ public class manageBooking extends javax.swing.JFrame {
       
        } else {
            
-           //Open error window
+         System.out.println("Please select an Event!");
        }
        
        

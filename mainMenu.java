@@ -14,8 +14,35 @@ public class mainMenu extends javax.swing.JFrame {
     /**
      * Creates new form mainMenu
      */
-    public mainMenu() {
+    
+    public User user;
+    public boolean userCheck;
+    
+   /* public mainMenu()
+    {
         initComponents();
+    }
+    */
+    public mainMenu(User user) {
+        
+        this.dispose();
+        initComponents();
+        if(user == null)
+        {
+            
+            userCheck = false;
+            String name = "Guest";
+            userLabel.setText(name);
+            loginLogoutButton.setText("Login/Signup");
+            viewHistoryButton.setVisible(false);
+        } else{
+            
+            EventBooking.userLogin(user);
+            userLabel.setText(user.name);
+            loginLogoutButton.setText("Logout");
+
+        }
+       
     }
 
     /**
@@ -32,6 +59,11 @@ public class mainMenu extends javax.swing.JFrame {
         createEvent = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        viewHistoryButton = new javax.swing.JButton();
+        loginLogoutButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UOW Event Booking System");
@@ -64,13 +96,36 @@ public class mainMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Please Select a Service");
+
+        viewHistoryButton.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
+        viewHistoryButton.setText("Acount Information");
+        viewHistoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewHistoryButtonActionPerformed(evt);
+            }
+        });
+
+        loginLogoutButton.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
+        loginLogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginLogoutButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
+        jLabel2.setText("Logged in as:");
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
+
+        userLabel.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -80,17 +135,40 @@ public class mainMenu extends javax.swing.JFrame {
                     .addComponent(manageEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewHistoryButton)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginLogoutButton)
+                .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginLogoutButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(viewHistoryButton)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userLabel)))
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,6 +197,23 @@ public class mainMenu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             new manageBooking().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void viewHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewHistoryButtonActionPerformed
+      new accountInformation().setVisible(true);
+    }//GEN-LAST:event_viewHistoryButtonActionPerformed
+
+    private void loginLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginLogoutButtonActionPerformed
+        
+        if(EventBooking.loginStatus)
+        {
+            EventBooking.userLogout();
+            this.dispose();
+            new mainMenu(null).setVisible(true);
+        } else{
+             new userLoginForm().setVisible(true);
+      
+        }
+    }//GEN-LAST:event_loginLogoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +245,7 @@ public class mainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mainMenu().setVisible(true);
+                new mainMenu(EventBooking.currentUser).setVisible(true);
             }
         });
     }
@@ -160,6 +255,11 @@ public class mainMenu extends javax.swing.JFrame {
     private javax.swing.JButton createEventButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton loginLogoutButton;
     private javax.swing.JButton manageEventButton;
+    private javax.swing.JLabel userLabel;
+    private javax.swing.JButton viewHistoryButton;
     // End of variables declaration//GEN-END:variables
 }
