@@ -39,6 +39,7 @@ public class manageBooking extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         showEvents();
+        eventStringList.setForeground(new java.awt.Color(12, 35, 64));
         eventStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(eventStringList);
 
@@ -50,6 +51,7 @@ public class manageBooking extends javax.swing.JFrame {
 
         jLabel1.setText("BookingID#: ");
 
+        jButton1.setForeground(new java.awt.Color(0, 71, 187));
         jButton1.setText("Find Booking");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +59,8 @@ public class manageBooking extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 71, 187));
         jLabel2.setText("Select an Event");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -67,19 +71,18 @@ public class manageBooking extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(78, 78, 78)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
-                            .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(196, 196, 196))
+                            .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel2)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,14 +90,14 @@ public class manageBooking extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(bookingIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(7, 7, 7)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
+                .addContainerGap())
         );
 
         pack();
@@ -107,18 +110,31 @@ public class manageBooking extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
        Event selectedEvent = null;
-       selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
-       String bookingID = bookingIDField.getText();
-       if(selectedEvent.findBooking(bookingID))
+       int selectedEventIndex = eventStringList.getSelectedIndex();
+       if(selectedEventIndex != -1)
        {
-          this.dispose();
-          Booking newBooking =  selectedEvent.getSingleBooking(bookingID);
-          new editBooking(selectedEvent, newBooking).setVisible(true);
+          selectedEvent = allEvents.allEvents.get(eventStringList.getSelectedIndex());
+          String bookingID = bookingIDField.getText();
           
+          if(EventBooking.checkStrings(bookingID))
+          {
+            
+            Booking newBooking =  selectedEvent.getSingleBooking(bookingID);
+            if(newBooking == null)
+            {
+                new errorForm("<html><b>BookingID: " + bookingID + " cannot be found. </b></html>").setVisible(true);
+            }else
+            {
+                  new editBooking(selectedEvent, newBooking).setVisible(true);
+                  this.dispose();
+            }
+          } else {
+              
+          }
       
        } else {
            
-           //Open error window
+         System.out.println("Please select an Event!");
        }
        
        

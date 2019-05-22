@@ -46,6 +46,7 @@ public class editBooking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel2.setForeground(new java.awt.Color(0, 71, 187));
         jLabel2.setText("Name");
 
         nameField.setText(selectedEvent.getSingleBooking(currentBooking.bookingID).getName());
@@ -55,6 +56,7 @@ public class editBooking extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setForeground(new java.awt.Color(0, 71, 187));
         jButton1.setText("Confirm Changes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +64,7 @@ public class editBooking extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setForeground(new java.awt.Color(0, 71, 187));
         jButton2.setText("Delete Booking");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +72,7 @@ public class editBooking extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(0, 71, 187));
         jLabel3.setText("Email");
 
         emailField.addActionListener(new java.awt.event.ActionListener() {

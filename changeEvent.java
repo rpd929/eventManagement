@@ -67,16 +67,22 @@ public class changeEvent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setForeground(new java.awt.Color(0, 71, 187));
         jLabel1.setText("Name");
 
+        jLabel3.setForeground(new java.awt.Color(0, 71, 187));
         jLabel3.setText("Dates");
 
+        jLabel4.setForeground(new java.awt.Color(0, 71, 187));
         jLabel4.setText("Price");
 
+        jLabel5.setForeground(new java.awt.Color(0, 71, 187));
         jLabel5.setText("Capacity");
 
+        jLabel6.setForeground(new java.awt.Color(0, 71, 187));
         jLabel6.setText("Location");
 
+        nameField.setForeground(new java.awt.Color(0, 71, 187));
         nameField.setText(allEvents.allEvents.get(indexEvent).getName());
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,11 +91,15 @@ public class changeEvent extends javax.swing.JFrame {
         });
 
         priceField.setText(Integer.toString(allEvents.allEvents.get(indexEvent).getPrice()));
+        priceField.setForeground(new java.awt.Color(0, 71, 187));
 
         capacityField.setText(Integer.toString(allEvents.allEvents.get(indexEvent).getCapacity()));
+        capacityField.setForeground(new java.awt.Color(0, 71, 187));
 
         locationField.setText(allEvents.allEvents.get(indexEvent).getLocation());
+        locationField.setForeground(new java.awt.Color(0, 71, 187));
 
+        jButton1.setForeground(new java.awt.Color(0, 71, 187));
         jButton1.setText("Confirm Changes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +107,7 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        monthComboBox.setForeground(new java.awt.Color(0, 71, 187));
         monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12"}));
         monthComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +115,7 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        yearComboBox.setForeground(new java.awt.Color(0, 71, 187));
         yearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"2019", "2020"}));
         yearComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +123,7 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        dayComboBox.setForeground(new java.awt.Color(0, 71, 187));
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"}));
         dayComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +131,7 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setForeground(new java.awt.Color(0, 71, 187));
         jButton2.setText("Delete Event");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +139,7 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        minuteComboBox.setForeground(new java.awt.Color(0, 71, 187));
         minuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "15", "30","45" }));
         minuteComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,8 +147,10 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setForeground(new java.awt.Color(0, 71, 187));
         jLabel7.setText("Time");
 
+        timeComboBox.setForeground(new java.awt.Color(0, 71, 187));
         timeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         timeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,18 +158,24 @@ public class changeEvent extends javax.swing.JFrame {
             }
         });
 
+        amPmComboBox.setForeground(new java.awt.Color(0, 71, 187));
         amPmComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PM", "AM"}));
+
+        jScrollPane1.setForeground(new java.awt.Color(0, 71, 187));
 
         descriptionField.setText(allEvents.allEvents.get(indexEvent).description);
         descriptionField.setColumns(20);
         descriptionField.setRows(5);
         jScrollPane1.setViewportView(descriptionField);
 
+        jLabel2.setForeground(new java.awt.Color(0, 71, 187));
         jLabel2.setText("Description");
 
+        jLabel8.setForeground(new java.awt.Color(0, 71, 187));
         jLabel8.setText("Email Address");
 
         emailField.setText(allEvents.allEvents.get(indexEvent).getEmail());
+        emailField.setForeground(new java.awt.Color(0, 71, 187));
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
@@ -170,40 +193,40 @@ public class changeEvent extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(8, 8, 8))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel4)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(minuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(amPmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(timeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                            .addComponent(capacityField)
-                            .addComponent(locationField))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton2)
+                                .addGap(8, 8, 8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel4)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(minuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(amPmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(timeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                    .addComponent(capacityField)
+                                    .addComponent(locationField))))))
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
