@@ -20,12 +20,15 @@ public class editBooking extends javax.swing.JFrame {
     Event selectedEvent;
     Booking currentBooking;
     public editBooking() {
-        initComponents();
+          this.setResizable(false);
+         initComponents();
     }
     public editBooking(Event selectedEvent, Booking currentBooking) {
+         this.setResizable(false);
         
         this.selectedEvent = selectedEvent;
         this.currentBooking = currentBooking;
+      
         initComponents();
     }
     /**
@@ -46,6 +49,7 @@ public class editBooking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel2.setForeground(new java.awt.Color(0, 71, 187));
         jLabel2.setText("Name");
 
         nameField.setText(selectedEvent.getSingleBooking(currentBooking.bookingID).getName());
@@ -55,6 +59,7 @@ public class editBooking extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setForeground(new java.awt.Color(0, 71, 187));
         jButton1.setText("Confirm Changes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +67,7 @@ public class editBooking extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setForeground(new java.awt.Color(0, 71, 187));
         jButton2.setText("Delete Booking");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +75,7 @@ public class editBooking extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(0, 71, 187));
         jLabel3.setText("Email");
 
         emailField.addActionListener(new java.awt.event.ActionListener() {
@@ -104,12 +111,12 @@ public class editBooking extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1)))

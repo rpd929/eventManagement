@@ -21,53 +21,69 @@ public class Booking {
     private String bookerName;
     private String emailAddress;
     private static allEvents eventList;
+    private static double discountPrice = -1;
 
-    public Booking(Event eventBooked, String bookerName, String email) {
+    public Booking(Event eventBooked, String bookerName, String email, double discountPrice) {
      
        
         this.bookingID = createBookingID();
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
         this.emailAddress = email;
-        eventBooked.makeBooking(this);
-        
-        //int eventIndex = eventList.findEvent(eventBooked.eventID);
+        bookEvent(eventBooked);
+        this.discountPrice = discountPrice;
        
-        System.out.println(bookingID);
         
-        
-        
-      
-  
-            
+        //int eventIndex = eventList.findEvent(eventBooked.eventID); 
     }
-    public Booking(Event eventBooked, String bookerName, String email, String bookingID) {
+     public Booking(Event eventBooked, String bookerName, String email) {
+     
+       
+        this.bookingID = createBookingID();
+        this.eventBooked = eventBooked; 
+        this.bookerName = bookerName;
+        this.emailAddress = email;
+        bookEvent(eventBooked);
+        
+       
+        
+        //int eventIndex = eventList.findEvent(eventBooked.eventID); 
+    }
+    public Booking(Event eventBooked,  String bookingID, String bookerName, String email) {
      
        
         this.bookingID = bookingID;
         this.eventBooked = eventBooked; 
         this.bookerName = bookerName;
         this.emailAddress = email;
-        eventBooked.makeBooking(this);
+        bookEvent(eventBooked);
         
         //int eventIndex = eventList.findEvent(eventBooked.eventID);
+     
+    }
+ public Booking(Event eventBooked,  String bookingID, String bookerName, String email, double discountPrice) {
+     
        
-        System.out.println(bookingID);
+        this.bookingID = bookingID;
+        this.eventBooked = eventBooked; 
+        this.bookerName = bookerName;
+        this.emailAddress = email;
+        bookEvent(eventBooked);
+        this.discountPrice = discountPrice;
         
-        
-        
-      
-  
-            
+        //int eventIndex = eventList.findEvent(eventBooked.eventID);
+     
+    }    
+    public final void bookEvent(Event event)
+    {
+        event.makeBooking(this);
     }
     
-    public void printBookingInformation()
+    public String viewBooking()
     {
         
-        System.out.println("BookingID: " + this.bookingID);
-        System.out.println("Event Name: " + this.eventBooked.getName());
-        System.out.println("Booked by: " + this.bookerName);
-        System.out.println("----------------------------");
+        String bookingString = eventBooked.eventString + "<html><b>BookingID: </b>" + this.bookingID + "</html>;";
+        return bookingString;
     }
     
     public String createBookingID()
@@ -78,6 +94,20 @@ public class Booking {
         Hex = Integer.toHexString(val);
         return Hex; 
         
+    }
+    
+    public String getEventID()
+    {
+        return eventBooked.eventID;
+    }
+    
+    public String getBookingID()
+    {
+        return bookingID;
+    }
+     public String getEmail()
+    {
+        return this.emailAddress;
     }
     
     public String getName()
@@ -95,13 +125,13 @@ public class Booking {
       
         String msg;
         String sub; 
-        sub = "Booking Change: " + this.bookingID; 
-        msg = "Booking Change for BookingID: " + this.bookingID;
+        sub = "Booking Change Confirmed for Booking: " + this.bookingID; 
+        msg = "<html><h3>Booking Change Confirmed for Booking: " + this.bookingID + "</h3></html>"; 
         
-        msg = msg + "\n" + "Event: " + this.eventBooked.getEventString();
-        msg = msg + "\n" + "Name: " + name + " Email: " + email;
+       
         JOptionPane.showMessageDialog(null,msg);
-        sendEmail.send(email, sub, msg);
+        //sendEmail.send(email, sub, msg);
+        Storage.updateBooking(this);
       
        
     }

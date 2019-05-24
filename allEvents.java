@@ -46,7 +46,7 @@ class allEvents {
     {
         if(allEventIDs.contains(eventID))
         {
-            System.out.print("Event Found!");
+            System.out.println("Event Found!");
             int indexOfEvent = allEventIDs.indexOf(eventID);
             return indexOfEvent;
            
@@ -62,12 +62,12 @@ class allEvents {
      public void replaceEvent(Event oldEvent, Event newEvent)
      {
         int index = allEventIDs.indexOf(oldEvent.eventID);
-        System.out.println(oldEvent.getBookingIDs() + "replaceEvent method");
         
          allEventIDs.set(index, newEvent.eventID);
          allEvents.set(index, newEvent);
          allEventStrings.set(index, createEventString(newEvent));
          newEvent.setBookings(oldEvent.getBookings(), oldEvent.getBookingIDs());
+         Storage.updateEvent(newEvent);
          
      }
      
@@ -76,7 +76,7 @@ class allEvents {
          allEventIDs.remove(eventToBeRemoved.eventID);
          allEvents.remove(eventToBeRemoved);
          allEventStrings.remove(eventToBeRemoved.toString());
-         Storage.removeEvent(eventToBeRemoved);
+         Storage.deleteEvent(eventToBeRemoved);
          
          JOptionPane.showMessageDialog(null,"Event Deleted");
          
