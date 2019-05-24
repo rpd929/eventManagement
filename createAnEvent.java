@@ -470,13 +470,11 @@ public class createAnEvent extends javax.swing.JFrame {
             myEvent.addPromoCodes(promoCodes);
             this.dispose();
             System.out.println(myEvent.eventID);
-            String message = "<html>Thankyou for booking with UOW Event Booking System. <br/> Your eventID is:<b> " + myEvent.eventID + "</b>";
-            message = message + "<br/>This can be used to alter or cancel your event in the 'manage event' window of the application.";
-            message = message + "<br/>This message has been emailed to: " + emailAddress + " along with any created Promo Codes for future reference. </html>";
+            String message = "Thankyou for booking with UOW Event Booking System. Your eventID is: " + myEvent.eventID + " \n";
+            message = message + "This can be used to alter or cancel your event in the 'manage event' window of the application.";
+            message = message + "\nThis message has been emailed to: " + emailAddress + " along with any created Promo Codes for future reference. \n";
+             String fullMessage = "";
            
-            //This displays message to the user to confirm booking made. Email is also sent to user.
-            JOptionPane.showMessageDialog(null,message);
-            sendEmail.send(emailAddress, eventName, message);
             
             if(EventBooking.loginStatus)
             {
@@ -484,7 +482,7 @@ public class createAnEvent extends javax.swing.JFrame {
             }
             if(promoCodeStatus)
             {
-                message = message + myEvent.printPromoCodes();
+              fullMessage = message + myEvent.printPromoCodes();
             
                 for(int x = 0; x < myEvent.getPromoCodes().size(); x++)
                 {
@@ -493,6 +491,9 @@ public class createAnEvent extends javax.swing.JFrame {
                 }
             }
            
+             //This displays message to the user to confirm booking made. Email is also sent to user.
+            JOptionPane.showMessageDialog(null,message);
+            sendEmail.send(emailAddress, eventName, fullMessage);
             System.out.println(message);
            
           
