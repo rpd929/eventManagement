@@ -34,6 +34,22 @@ class allEvents {
         
     }
     
+    public static ArrayList<String> showAllEventPreviews()
+    {
+        String eventString = "";
+        ArrayList<String> display = new ArrayList<>();
+        for(int x = 0; x < allEvents.size(); x++)
+        {
+            eventString = "<html><h2 align=center>" + allEvents.get(x).getName() + "</h2><br/>";
+            eventString = eventString + "Location: " + allEvents.get(x).getLocation() + "<br/>";
+            eventString = eventString + "Date and Time: " + allEvents.get(x).getReadableDate();
+            eventString = eventString + "</html>";
+            display.add(eventString);
+        }
+        return display;
+    }    
+    
+   
     public static Event getEvent(int eventIndex)
     {
         Event retrievedEvent = allEvents.get(eventIndex);
@@ -46,7 +62,7 @@ class allEvents {
     {
         if(allEventIDs.contains(eventID))
         {
-            System.out.print("Event Found!");
+            System.out.println("Event Found!");
             int indexOfEvent = allEventIDs.indexOf(eventID);
             return indexOfEvent;
            
@@ -62,12 +78,12 @@ class allEvents {
      public void replaceEvent(Event oldEvent, Event newEvent)
      {
         int index = allEventIDs.indexOf(oldEvent.eventID);
-        System.out.println(oldEvent.getBookingIDs() + "replaceEvent method");
         
          allEventIDs.set(index, newEvent.eventID);
          allEvents.set(index, newEvent);
          allEventStrings.set(index, createEventString(newEvent));
          newEvent.setBookings(oldEvent.getBookings(), oldEvent.getBookingIDs());
+         Storage.updateEvent(newEvent);
          
      }
      
@@ -76,7 +92,7 @@ class allEvents {
          allEventIDs.remove(eventToBeRemoved.eventID);
          allEvents.remove(eventToBeRemoved);
          allEventStrings.remove(eventToBeRemoved.toString());
-         Storage.removeEvent(eventToBeRemoved);
+         Storage.deleteEvent(eventToBeRemoved);
          
          JOptionPane.showMessageDialog(null,"Event Deleted");
          

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package eventbooking;
+import static eventbooking.bookEvent.selectedEvent;
 import java.time.Instant;
 import java.time.temporal.TemporalField;
 import java.util.*;
@@ -20,7 +21,7 @@ public class Event {
    public String eventString;
    private Calendar date;
    private int price;
-   private String[] promoCodes;
+   private ArrayList<PromoCode> promoCodes = new ArrayList<>();
    private int capacity;
    private String location;
    private String name;
@@ -40,11 +41,29 @@ public class Event {
         this.allBookings = new ArrayList<Booking>();
         this.allBookingIDs = new ArrayList<String>();
         this.eventString = this.name;
-        eventString = eventString + " at " + this.location;
-        eventString = eventString + " on " + this.getDate().getDay();
+       eventString = eventString + "Location: " + this.location;
+        eventString = eventString + "\nDate & Time: " + this.getDate().getDate();
         eventString = eventString + "/" + (this.getDate().getMonth() + 1);
         eventString = eventString + "/" + (this.getDate().getYear() +1900) + " at ";
-        eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        
+        if(this.getDate().getHours() > 12)
+        {
+            eventString = eventString + (this.getDate().getHours() - 12);
+              if(this.getDate().getMinutes() == 0)
+                {
+                    eventString = eventString + ":" + this.getDate().getMinutes();
+                    eventString = eventString + "0 PM";
+                   
+                }
+        } else if(this.getDate().getMinutes() == 0)
+        {
+            eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+            eventString = eventString + "0";
+        } else {
+             eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        }
+       
+        
         this.description = description;
         this.emailAddress = email;
    
@@ -62,15 +81,64 @@ public class Event {
         this.allBookings = new ArrayList<Booking>();
         this.allBookingIDs = new ArrayList<String>();
         this.eventString = this.name;
-        eventString = eventString + " at " + this.location;
-        eventString = eventString + " on " + this.getDate().getDay();
+        eventString = eventString + "Location: " + this.location;
+        eventString = eventString + "Date & Time" + this.getDate().getDate();
         eventString = eventString + "/" + (this.getDate().getMonth() + 1);
         eventString = eventString + "/" + (this.getDate().getYear() +1900) + " at ";
-        eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        
+        if(this.getDate().getHours() > 12)
+        {
+            eventString = eventString + (this.getDate().getHours() - 12);
+              if(this.getDate().getMinutes() == 0)
+                {
+                    eventString = eventString + ":" + this.getDate().getMinutes();
+                    eventString = eventString + "0 PM";
+                   
+                }
+        } else if(this.getDate().getMinutes() == 0)
+        {
+            eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+            eventString = eventString + "0";
+        } else {
+             eventString = eventString + this.getDate().getHours() + ":" + this.getDate().getMinutes();
+        }
+       
+        
+      
+        
+       
         this.description = description;
         this.emailAddress = email;
    
     }
+    
+    
+     public void checkBooking(String name, String email)
+    {
+        if(EventBooking.checkStrings(name) && EventBooking.checkEmail(email));
+        {
+             Booking newBooking = new Booking(this, name, email);
+             String message = "Hi " + name + ",";
+             message = message + "Thanks for booking the event: " + getName();
+             message = message + " at " + getLocation() + " " + getDate();
+             message = message + "\nYour booking number is: " + newBooking.bookingID + ". ";
+             message = message + "\nTo cancel or alter your booking, locate your booking in the 'manage booking' view of the applciation.";
+             message = message + "\nAn email with this information has also been sent to the supplied address.";
+             
+             sendEmail.send(email, selectedEvent.getName(), message);
+             JOptionPane.showMessageDialog(null,message);
+             Storage.insertBooking(newBooking);
+             
+      
+        }
+    }
+   
+     public void addPromoCodes(ArrayList<PromoCode> codes)
+     {
+       
+             promoCodes = codes;
+           
+     }
     
     
     
@@ -82,11 +150,11 @@ public class Event {
     public String seeMore()
     {
         String seeMoreString;
-        seeMoreString = "<html><b> Event Name: </b> " + name + ". <br/><br/>";
-        seeMoreString = seeMoreString + "<b>Date: </b>" + getReadableDate()+ ".<br/><br/>";
-        seeMoreString = seeMoreString + "<b>Price: $</b>" + price + ". <br/><br/>";
-        seeMoreString = seeMoreString + "<b>Location: </b>" + location + ". <br/><br/>";
-        seeMoreString = seeMoreString + "<b>Description: </b>" + description + "</html>";
+        seeMoreString = "<html><h2 align=center>" + name + "</h2> ";
+        seeMoreString = seeMoreString + "<b>Date: </b>" + getReadableDate()+ ".<br/>";
+        seeMoreString = seeMoreString + "<b>Price: $</b>" + price + ". <br/>";
+        seeMoreString = seeMoreString + "<b>Location: </b>" + location + ". <br/>";
+        seeMoreString = seeMoreString + "<b>Description: </b>" + description;
         return seeMoreString;
         
     }
@@ -95,21 +163,50 @@ public class Event {
         return eventID;
     }
     
+    public boolean checkCapacity(int numberOfBookings)
+    {
+        int numberOfAvailableBookings = capacity - allBookings.size();
+        if(numberOfBookings < numberOfAvailableBookings)
+        {
+            
+            return true;
+        } else{
+            new errorForm("Event Sold out! Try booking less tickets.").setVisible(true);
+            return false;
+        }
+    }
+    
     public String getReadableDate(){
         
         String dateString;
         dateString = Integer.toString(date.getTime().getDate()) + "/";
-        dateString = dateString + Integer.toString(date.getTime().getMonth()+1) + "/";
+        dateString = dateString + Integer.toString(date.getTime().getMonth() + 1) + "/";
         dateString = dateString + Integer.toString(date.getTime().getYear() + 1900) + " ";
+        
         if(date.getTime().getHours() > 12)
         {
             dateString = dateString + Integer.toString(date.getTime().getHours() - 12) + ":";
-            dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "PM";
+           
+            
+            if(date.getTime().getMinutes() == 0)
+            {
+               dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "0 PM";
+
+            } else {
+               dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "PM";
+
+            }
             
         } else {
             
             dateString = dateString + Integer.toString(date.getTime().getHours()) + ":";
+            if(date.getTime().getMinutes() == 0)
+            {
+               dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "0 AM";
+
+            } else {
             dateString = dateString + Integer.toString(date.getTime().getMinutes()) + "AM";
+            }
             
         }
         return dateString;
@@ -126,12 +223,16 @@ public class Event {
         return readableDate;
         
     }
+    
+    
+    
+   
 
     public int getPrice() {
         return price;
     }
 
-    public String[] getPromoCodes() {
+    public ArrayList<PromoCode> getPromoCodes() {
         return promoCodes;
     }
     
@@ -156,6 +257,10 @@ public class Event {
         return name;
     }
     
+    public String getDescription(){
+        return description;
+    }
+    
     public void setBookings(ArrayList<Booking> allBookings, ArrayList<String> allBookingIDs)
     {
         this.allBookings = allBookings;
@@ -175,6 +280,48 @@ public class Event {
     }
 
     
+    
+    public double getDiscountAmount(String code)
+    {
+        for(int x = 0; x < promoCodes.size(); x++)
+        {
+            String checkCode = promoCodes.get(x).codeID;
+            if(code.equals(checkCode))
+            {
+                
+                if(promoCodes.get(x).validStatus)
+                {
+                    System.out.println("Returning value");
+                    return promoCodes.get(x).percentageDiscount;
+                    
+                } else {
+                  new  errorForm("Code already used!").setVisible(true);
+                }
+                
+            }
+            
+        }
+        
+       
+        return -1;
+        
+    }
+     public double usePromoCode(String code)
+    {
+        for(int x = 0; x< promoCodes.size(); x++)
+        {
+            PromoCode checkCode = null;
+            checkCode = promoCodes.get(x);
+            if(checkCode.codeID.equals(code))
+            {
+               
+                return x;
+            }
+        }
+        
+        return -1;
+        
+    }
     
     
     public void makeBooking(Booking newBooking){
@@ -203,8 +350,14 @@ public class Event {
     public Booking getSingleBooking(String bookingID)
     {
         int indexOfBooking = allBookingIDs.indexOf(bookingID);
-        Booking newBooking = allBookings.get(indexOfBooking);
-        return newBooking;
+        if (indexOfBooking == -1)
+        {
+            return null;
+        }else{
+                 Booking newBooking = allBookings.get(indexOfBooking);
+        
+                 return newBooking;
+        }
         
     }
     public String createEventID()
@@ -222,6 +375,7 @@ public class Event {
     {
         this.allBookingIDs.remove(booking.bookingID);
         this.allBookings.remove(booking);
+        Storage.deleteBooking(booking.bookingID);
         JOptionPane.showMessageDialog(null,"Booking Deleted");
 
         
@@ -239,6 +393,19 @@ public class Event {
         System.out.println("Event Location: " + this.getLocation());
         
         System.out.println("EVENT ID " + this.eventID);
+    }
+    
+    
+    public String printPromoCodes()
+    {
+        String codes = "\n\n\nPromotional Code Discount%: ";
+        codes = codes +  (promoCodes.get(0).percentageDiscount * 100.00);
+        codes = codes + "\n Promotional Codes: ";
+        for(int x = 0; x < promoCodes.size(); x++)
+        {
+            codes = codes + "\n" + promoCodes.get(x).codeID;
+        }
+        return codes;
     }
     
     

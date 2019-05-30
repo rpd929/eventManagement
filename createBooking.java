@@ -16,7 +16,9 @@ public class createBooking extends javax.swing.JFrame {
      * Creates new form createBooking
      */
     public createBooking() {
+        this.dispose();
         initComponents();
+        this.setResizable(false);
     }
 
     /**
@@ -36,18 +38,23 @@ public class createBooking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        eventStringList.setForeground(new java.awt.Color(12, 35, 64));
+        eventStringList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         showEvents();
         eventStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(eventStringList);
 
-        jButton1.setText("See More");
+        jButton1.setForeground(new java.awt.Color(0, 71, 187));
+        jButton1.setText("See Event Details");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Select an Event to see more Details");
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 71, 187));
+        jLabel2.setText("Select an Event to see Details");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,30 +63,34 @@ public class createBooking extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel1)
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel2))
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(jButton1)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,9 +98,12 @@ public class createBooking extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       int selectedEvent = eventStringList.getSelectedIndex();
+      if(selectedEvent != -1)
+      {
+        new EventSeeMore(selectedEvent).setVisible(true);
+        this.dispose();
+      }
       
-      new EventSeeMore(selectedEvent).setVisible(true);
-      this.dispose();
 
       
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -134,16 +148,11 @@ public class createBooking extends javax.swing.JFrame {
     {
         allEvents eventList = new allEvents();
         ArrayList<String> allEventsStrings = new ArrayList<>();
-        for(int count = 0; count < eventList.getSize(); count++)
-        {
-            String eventString = eventList.getEvent(count).eventString;
-            allEventsStrings.add(eventString);
-            
-        }
+       
         
         eventStringList.setModel(new javax.swing.DefaultListModel<String>() {
 
-     ArrayList<String> allEventStrings = allEventsStrings;
+        ArrayList<String> allEventStrings = allEvents.showAllEventPreviews();
 
     public int getSize() { return allEventStrings.size();}
     public String getElementAt(int i) { return allEventStrings.get(i);}

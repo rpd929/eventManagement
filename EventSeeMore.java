@@ -16,11 +16,12 @@ public class EventSeeMore extends javax.swing.JFrame {
      */
     int eventIndex;
     public EventSeeMore() {
+        this.setResizable(false);
         initComponents();
     }
-     public EventSeeMore(int index) {
+     public EventSeeMore(int index)
+     {  this.setResizable(false);
         initComponents();
-        
         this.eventIndex = index;
         showEvent();
     }
@@ -41,9 +42,12 @@ public class EventSeeMore extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Event Details");
+        setPreferredSize(new java.awt.Dimension(350, 275));
+        setResizable(false);
 
         eventLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        makeBookingButton.setForeground(new java.awt.Color(0, 71, 187));
         makeBookingButton.setText("Make Booking");
         makeBookingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +56,7 @@ public class EventSeeMore extends javax.swing.JFrame {
         });
 
         jLabel1.setText("<h1> Event Information </h1><br/>");
+        jLabel1.setForeground(new java.awt.Color(0, 71, 187));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html><h1> Event Information </h1><br/>");
 
@@ -60,36 +65,49 @@ public class EventSeeMore extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(eventStringLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(makeBookingButton))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eventStringLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(eventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addComponent(makeBookingButton))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(eventStringLabel)
+                .addGap(296, 296, 296))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(eventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(eventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(makeBookingButton)
-                .addGap(12, 12, 12))
+                .addComponent(makeBookingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void makeBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeBookingButtonActionPerformed
-          new bookEvent(allEvents.allEvents.get(eventIndex)).setVisible(true);
+          if(EventBooking.loginStatus)
+          { 
+              Event event = allEvents.getEvent(eventIndex);
+              
+             // EventBooking.currentUser.bookEvent(eventIndex);
+              new bookEvent(EventBooking.currentUser, event).setVisible(true);
+             
+          
+          } else
+          {
+              new bookEvent(allEvents.allEvents.get(eventIndex)).setVisible(true);
+          }
    
           this.dispose();
           
